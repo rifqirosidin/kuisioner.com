@@ -1,0 +1,18 @@
+.tag-line-slider {
+    position: relative;
+    top: -400px;
+    margin-left: 30px;
+}
+
+.tag-line-slider .tag-line-title {
+    color: #cf7208;
+    width: 450px;
+    font-size: 40px;
+}
+
+.tag-line-slider .tag-line-desc {
+    color: #575554;
+    width: 450px;
+    font-size: 15px;
+
+}
