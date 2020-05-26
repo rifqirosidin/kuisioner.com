@@ -30,14 +30,14 @@
                            <div class="tab-pane active" id="wizard-validation-material-step1" role="tabpanel">
                                <div class="form-group">
                                    <div class="form-material floating">
-                                       <input class="form-control" type="text" id="wizard-validation-material-firstname" name="wizard-validation-material-firstname">
-                                       <label for="wizard-validation-material-firstname">Judul</label>
+                                       <input class="form-control" type="text" id="wizard-validation-material-title" name="wizard-validation-material-jumlah">
+                                       <label for="wizard-validation-material-title">Judul</label>
                                    </div>
                                </div>
                                <div class="form-group">
                                    <div class="form-material floating">
-                                       <input class="form-control" type="text" id="wizard-validation-material-lastname" name="wizard-validation-material-lastname">
-                                       <label for="wizard-validation-material-lastname">Jumlah Responden</label>
+                                       <input class="form-control" type="text" id="wizard-validation-material-jumlah" name="wizard-validation-material-jumlah">
+                                       <label for="wizard-validation-material-jumlah">Jumlah Responden</label>
                                    </div>
                                </div>
                                <div class="form-group">
@@ -84,21 +84,22 @@
 
                            <!-- Step 2 -->
                            <div class="tab-pane" id="wizard-validation-material-step2" role="tabpanel">
-{{--                               @include('dashboard.survey.template_form')--}}
-                               <div class="form-group">
-                                   <div class="form-material floating">
-                                       <input type="text" class="form-control" name="embed_code">
-                                       <label for="embed">Embed Code Google Form</label>
-                                   </div>
 
-                               </div>
-                               <div class="form-group">
-                                   <div class="form-material floating">
-                                       <input type="text" class="form-control" name="link_google_form">
-                                       <label for="link">Link Google Form</label>
-                                   </div>
+                               @include('dashboard.survey.template_form')
+{{--                               <div class="form-group">--}}
+{{--                                   <div class="form-material floating">--}}
+{{--                                       <input type="text" class="form-control" name="embed_code">--}}
+{{--                                       <label for="embed">Embed Code Google Form</label>--}}
+{{--                                   </div>--}}
 
-                               </div>
+{{--                               </div>--}}
+{{--                               <div class="form-group">--}}
+{{--                                   <div class="form-material floating">--}}
+{{--                                       <input type="text" class="form-control" name="link_google_form">--}}
+{{--                                       <label for="link">Link Google Form</label>--}}
+{{--                                   </div>--}}
+
+{{--                               </div>--}}
 
                            </div>
                            <!-- END Step 2 -->
@@ -143,7 +144,7 @@
 
 @push('js')
     <script src="{{ asset('vendor/assets/js/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js') }}"></script>
-{{--    <script src="{{ asset('vendor/assets/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>--}}
+    <script src="{{ asset('vendor/assets/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('vendor/assets/js/plugins/jquery-validation/additional-methods.js') }}"></script>
 
     <!-- Page JS Code -->
