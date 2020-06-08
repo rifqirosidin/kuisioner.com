@@ -16,12 +16,19 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('number_of_respondens');
+            $table->unsignedBigInteger('user_id');
+            $table->integer('number_of_respondents');
             $table->string('gender');
             $table->string('city')->nullable();
             $table->string('age')->nullable();
             $table->text('description');
             $table->double('respondent_fee');
+            $table->double('total_cost');
+            $table->string('link_google_form');
+            $table->text('embed_google_form');
+            $table->text('closing_sentence')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

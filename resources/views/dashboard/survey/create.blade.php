@@ -22,62 +22,13 @@
                    <!-- END Step Tabs -->
 
                    <!-- Form -->
-                   <form class="js-wizard-validation-material-form" action="be_forms_wizard.html" method="post">
-                   @csrf
+                   <form class="js-wizard-validation-material-form" action="{{ route('tasks.store') }}" method="post">
+                    @csrf
                    <!-- Steps Content -->
                        <div class="block-content block-content-full tab-content" style="min-height: 267px;">
                            <!-- Step 1 -->
                            <div class="tab-pane active" id="wizard-validation-material-step1" role="tabpanel">
-                               <div class="form-group">
-                                   <div class="form-material floating">
-                                       <input class="form-control" type="text" id="wizard-validation-material-title" name="wizard-validation-material-jumlah">
-                                       <label for="wizard-validation-material-title">Judul</label>
-                                   </div>
-                               </div>
-                               <div class="form-group">
-                                   <div class="form-material floating">
-                                       <input class="form-control" type="text" id="wizard-validation-material-jumlah" name="wizard-validation-material-jumlah">
-                                       <label for="wizard-validation-material-jumlah">Jumlah Responden</label>
-                                   </div>
-                               </div>
-                               <div class="form-group">
-                                       <label for="" class="mb-2 mt-10">Jenis Kelamin</label>
-                                       <div class="custom-control custom-radio mb-2">
-                                           <input type="radio" id="gender" name="gender" class="custom-control-input">
-                                           <label class="custom-control-label" for="gender">Laki - Laki</label>
-                                       </div>
-                                       <div class="custom-control custom-radio">
-                                           <input type="radio" id="gender1" name="gender" class="custom-control-input">
-                                           <label class="custom-control-label" for="gender1">Perempuan</label>
-                                       </div>
-                                </div>
-                               <div class="form-group">
-                                   <div class="form-material floating">
-                                       <input class="form-control" type="text" id="city" name="city">
-                                       <label for="city">Kota</label>
-                                   </div>
-                               </div>
-
-                               <div class="form-group">
-                                   <div class="form-material floating">
-                                       <textarea name="description" id="description" cols="30" class="form-control" rows="5"></textarea>
-                                       <label for="description">Deskripsi</label>
-                                   </div>
-                               </div>
-                               <div class="form-group">
-                                   <div class="form-material floating">
-                                       <input class="form-control" type="text" id="responden_fee" name="responden_fee">
-                                       <label for="responden_fee">Insentif Responden</label>
-                                   </div>
-                                   <span class="text-danger">note: per orang</span>
-                               </div>
-                               <div class="form-group">
-                                   <div class="form-material floating">
-                                       <input class="form-control" type="text" id="total_cost" name="total_cost"disabled>
-                                       <label for="total_cost">Total Biaya</label>
-                                   </div>
-                                   <span class="text-danger">Total biaya: jumlah responden * insentif responden + 5%</span>
-                               </div>
+                                @include('dashboard.survey.create_task')
 
                            </div>
                            <!-- END Step 1 -->
@@ -85,21 +36,31 @@
                            <!-- Step 2 -->
                            <div class="tab-pane" id="wizard-validation-material-step2" role="tabpanel">
 
-                               @include('dashboard.survey.template_form')
-{{--                               <div class="form-group">--}}
-{{--                                   <div class="form-material floating">--}}
-{{--                                       <input type="text" class="form-control" name="embed_code">--}}
-{{--                                       <label for="embed">Embed Code Google Form</label>--}}
-{{--                                   </div>--}}
+{{--                                    <div class="row">--}}
+{{--                                        <div class="col-md-10">--}}
+{{--                                            @include('dashboard.survey.template_form')--}}
+{{--                                        </div>--}}
+{{--                                        <div class="panel-menu">--}}
+{{--                                            <div class="block block-bordered">--}}
+{{--                                                <div class="block-content">--}}
+{{--                                                    <h3 class="block-title mb-5">Panel</h3>--}}
+{{--                                                    <ul class="list-unstyled">--}}
+{{--                                                        <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Short Text</button></li>--}}
+{{--                                                        <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Long Text</button></li>--}}
+{{--                                                        <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Radio</button></li>--}}
+{{--                                                        <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Checkbox</button></li>--}}
+{{--                                                        <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Select</button></li>--}}
+{{--                                                        <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">File</button></li>--}}
+{{--                                                    </ul>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-{{--                               </div>--}}
-{{--                               <div class="form-group">--}}
-{{--                                   <div class="form-material floating">--}}
-{{--                                       <input type="text" class="form-control" name="link_google_form">--}}
-{{--                                       <label for="link">Link Google Form</label>--}}
-{{--                                   </div>--}}
 
-{{--                               </div>--}}
+                                    @include('dashboard.survey.template_form_old')
+
+{{--                                @include('dashboard.survey.google_form')--}}
 
                            </div>
                            <!-- END Step 2 -->
@@ -122,7 +83,7 @@
                                    </button>
                                </div>
                                <div class="col-6 text-right">
-                                   <button type="button" class="btn btn-alt-secondary" data-wizard="next">
+                                   <button type="button" id="next" class="btn btn-alt-secondary" data-wizard="next">
                                        Next <i class="fa fa-angle-right ml-5"></i>
                                    </button>
                                    <button type="submit" class="btn btn-alt-primary d-none" data-wizard="finish">
@@ -137,6 +98,22 @@
                </div>
                <!-- END Validation Wizard 2 -->
            </div>
+{{--           <div class="col-md-2">--}}
+{{--               <div class="block block-bordered">--}}
+{{--                   <div class="block-content">--}}
+{{--                       <h3 class="block-title mb-5">Panel</h3>--}}
+{{--                       <ul class="list-unstyled">--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Short Text</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Long Text</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Radio</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Checkbox</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Select</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">File</button></li>--}}
+{{--                       </ul>--}}
+{{--                   </div>--}}
+{{--               </div>--}}
+{{--           </div>--}}
+
        </div>
    </div>
 
@@ -149,4 +126,6 @@
 
     <!-- Page JS Code -->
     <script src="{{ asset('vendor/assets/js/pages/be_forms_wizard.min.js') }}"></script>
+
+
 @endpush

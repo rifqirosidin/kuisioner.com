@@ -69,6 +69,7 @@
     });
 
 </script>
+{{--<script src="{{ asset('js/jquery-3.5.1.slim.min.js') }}"></script>--}}
 @stack('js')
 
 <!-- Start of HubSpot Embed Code -->

@@ -4,7 +4,7 @@
     <div id="page-container" class="bg-white sidebar-inverse side-scroll page-header-fixed page-header-inverse main-content-boxed">
 
         <!-- Sidebar -->
-        <nav id="sidebar" style="background: #232e40">
+        <nav id="sidebar" style="background: #232e40" class="navbar-fixed-top">
             <!-- Sidebar Content -->
             <div class="sidebar-content">
                 <!-- Side Header -->
@@ -200,4 +200,15 @@
     </div>
 
 @endsection
+
+@push('js')
+    <script>
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $(".navbar-fixed-top");
+                $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+            });
+        });
+    </script>
+@endpush
 

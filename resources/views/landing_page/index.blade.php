@@ -8,7 +8,9 @@
 
 @section('main-content')
 
-    @include('partials.header')
+    @include('landing_page.header')
+    @include('landing_page.timeline')
+    @include('landing_page.testimoni')
 
 @endsection
 

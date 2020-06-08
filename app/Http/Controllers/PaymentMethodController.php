@@ -2,84 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\PaymentMethod;
+
+use App\Http\Requests\StorePaymentMethod;
+use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PaymentMethodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $paymentMethods = PaymentMethod::all();
+        return view('admin.setting.payment_method.index', compact('paymentMethods'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StorePaymentMethod $request)
     {
-        //
+       $validated = $request->validated();
+        PaymentMethod::create($validated);
+        Session::flash('success', 'Created Payment Method Successfully');
+        return redirect()->back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit($id)
     {
-        //
+        $paymentMethod = PaymentMethod::find($id);
+        return view('admin.setting.payment_method.edit', compact('paymentMethod'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\PaymentMethod  $paymentMethod
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PaymentMethod $paymentMethod)
+    public function update(StorePaymentMethod $request, $id)
     {
-        //
+        $validated = $request->validated();
+        $paymentMethod = PaymentMethod::find($id);
+        $paymentMethod->update($validated);
+        Session::flash('success', 'Updated Payment Method Successfully');
+        return redirect()->route('payment-methods.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\PaymentMethod  $paymentMethod
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PaymentMethod $paymentMethod)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PaymentMethod  $paymentMethod
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PaymentMethod $paymentMethod)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\PaymentMethod  $paymentMethod
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PaymentMethod $paymentMethod)
-    {
-        //
+        PaymentMethod::destroy($id);
+        Session::flash('success', 'Deleted Payment Method Successfully');
+        return route('payment-methods.index');
     }
 }

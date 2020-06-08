@@ -17,7 +17,8 @@
             <div class="content-header-section text-center align-parent sidebar-mini-hidden">
                 <!-- Close Sidebar, Visible only on mobile screens -->
                 <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none align-v-r" data-toggle="layout" data-action="sidebar_close">
+                <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none align-v-r" data-toggle="layout"
+                        data-action="sidebar_close">
                     <i class="fa fa-times text-danger"></i>
                 </button>
                 <!-- END Close Sidebar -->
@@ -25,7 +26,8 @@
                 <!-- Logo -->
                 <div class="content-header-item">
                     <a class="link-effect font-w700" href="#">
-                        <span class="font-size-xl text-dual-primary-dark">Kuisioner</span><span class="font-size-xl color-text">.com</span>
+                        <span class="font-size-xl text-dual-primary-dark">Kuisioner</span><span
+                            class="font-size-xl color-text">.com</span>
                     </a>
                 </div>
                 <!-- END Logo -->
@@ -38,7 +40,8 @@
         <div class="content-side content-side-full content-side-user px-10 align-parent">
             <!-- Visible only in mini mode -->
             <div class="sidebar-mini-visible-b align-v animated fadeIn">
-                <img class="img-avatar img-avatar32" src="{{ asset('vendor\assets\media\avatars\avatar16.jpg') }}" alt="">
+                <img class="img-avatar img-avatar32" src="{{ asset('vendor\assets\media\avatars\avatar16.jpg') }}"
+                     alt="">
             </div>
             <!-- END Visible only in mini mode -->
 
@@ -54,12 +57,15 @@
                     </li>
                     <li class="list-inline-item">
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                        <a class="link-effect text-dual-primary-dark" data-toggle="layout" data-action="sidebar_style_inverse_toggle" href="javascript:void(0)">
+                        <a class="link-effect text-dual-primary-dark" data-toggle="layout"
+                           data-action="sidebar_style_inverse_toggle" href="javascript:void(0)">
                             <i class="si si-drop"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('form-logout').submit();" class="link-effect text-dual-primary-dark">
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('form-logout').submit();"
+                           class="link-effect text-dual-primary-dark">
                             <i class="si si-logout"></i>
                         </a>
                     </li>
@@ -76,15 +82,33 @@
         <div class="content-side content-side-full">
             <ul class="nav-main">
                 <li>
-                    <a class="active" href="#"><i class="si si-home"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                    <a class="active" href="{{ route('dashboard') }}"><i class="si si-home"></i><span
+                            class="sidebar-mini-hide">Dashboard</span></a>
                 </li>
                 <li>
-                    <a  href="#"><i class="fa fa-tasks"></i><span class="sidebar-mini-hide">Daftar Tugas</span></a>
+                    <a href="{{ route('tasks.index') }}"><i class="fa fa-tasks"></i><span class="sidebar-mini-hide">Daftar Tugas</span></a>
                 </li>
                 <li>
-                    <a  href="{{ route('surveys.create') }}"><i class="si si-note"></i><span class="sidebar-mini-hide">Buat Survey</span></a>
+                    <a href="{{ route('surveys.create') }}"><i class="si si-note"></i><span class="sidebar-mini-hide">Buat Survey</span></a>
                 </li>
+                <li>
+                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i><span
+                            class="sidebar-mini-hide">Pengaturan</span></a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('banners.index') }}">Banner</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('testimonies.index') }}">Testimoni</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('payment-methods.index') }}">Metode Pembayaran</a>
+                        </li>
 
+
+                    </ul>
+
+                </li>
             </ul>
 
         </div>

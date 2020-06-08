@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <p class="font-weight-bold font-w400 text-center">Nominal yang harus dibayar</p>
-        <h2 class="text-center">Rp.300.000</h2>
+        <h2 class="text-center" id="total">Rp.300.000</h2>
 
         <div class="form-group">
             <div class="custom-control custom-radio mb-2">
@@ -17,3 +17,4 @@
         </div>
     </div>
 </div>
+

@@ -13,14 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing_page.index');
-});
+Route::get('/','LandingPageController@index')->name('index');
 
 Auth::routes();
 
 
+Route::middleware('auth')->group(function (){
+    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    Route::resource('surveys', 'SurveyController');
+    Route::resource('users', 'UserController');
+    Route::resource('tasks', 'TaskController');
+    Route::resource('banners', 'BannerController');
+    Route::resource('testimonies', 'TestimonyController');
+    Route::resource('sliders', 'SliderController');
+    Route::resource('payment-methods', 'PaymentMethodController');
+});
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::resource('surveys', 'SurveyController');
-Route::resource('users', 'UserController');
