@@ -22,6 +22,7 @@ class SliderController extends Controller
            'slider' => 'required|image|mimes:png,jpg,jpeg,svg'
         ]);
 
+
         if ($request->hasFile('slider')){
             Slider::create([
                 'image' => $request->file('slider')->store('slider'),

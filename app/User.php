@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Form;
+use App\Models\FormSubmit;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,5 +48,14 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function form()
+    {
+        return $this->hasMany(Form::class);
+    }
+    public function formSubmit()
+    {
+        return $this->hasMany(FormSubmit::class, 'submit_by_user_id');
     }
 }

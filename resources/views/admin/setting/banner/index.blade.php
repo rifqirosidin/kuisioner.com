@@ -161,7 +161,7 @@
                             <div class="form-group row">
                                 <label class="col-12" for="example-select">Status</label>
                                 <div class="col-md-12">
-                                    <select class="form-control" id="example-select" name="status">
+                                    <select class="form-control" id="example-select" name="1">
                                         <option value="1">Publish</option>
                                         <option value="0">Draft</option>
                                     </select>
