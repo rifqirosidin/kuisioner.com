@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTask;
-use App\Task;
+use App\Models\ElementType;
+use App\Models\Form;
+use App\Models\FormElement;
+use App\Models\ListOption;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
 
 class TaskController extends Controller
 {
@@ -20,7 +26,7 @@ class TaskController extends Controller
 
     public function create()
     {
-        //
+        return view('dashboard.task.create');
     }
 
     public function store(StoreTask $request)
@@ -29,19 +35,33 @@ class TaskController extends Controller
         $validated['user_id'] = Auth::id();
 
         try {
-            Task::create($validated);
-            Session::flash('success', 'Created Survey Successfully');
-            return redirect()->back();
+           $task = Task::create($validated);
+
+            Session::flash('success', 'Task saved');
+            return redirect()->route('surveys.create', $task->id);
         }catch (\Exception $exception){
-            Session::flash('error', 'Created Survey Failed');
+            Session::flash('error', 'Task failed to save');
             return redirect()->back();
         }
+
+
     }
+
 
     public function show(Task $task)
     {
 
         return view('dashboard.task.show', compact('task'));
+    }
+
+    public function showForm($taskId)
+    {
+        $task = Task::with(['form.formElements.listOptions'])
+            ->has('form')
+            ->where(['user_id' => Auth::id(), 'id' => $taskId])
+            ->first();
+
+        return view('dashboard.task.show_form', compact('task'));
     }
 
     public function edit(Task $task)
@@ -58,4 +78,6 @@ class TaskController extends Controller
     {
         //
     }
+
+
 }

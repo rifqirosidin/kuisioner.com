@@ -1,19 +1,21 @@
 <div class="form-group">
     <div class="form-material floating">
-        <input class="form-control" type="text" value="{{ old('title') }}" id="title" name="title">
+{{--        <input class="form-control" type="text" value="{{ old('title') }}" id="title" name="title">--}}
+        <input class="form-control" type="text" value="test title" id="title" name="title">
         <label for="title">Judul</label>
     </div>
 </div>
 <div class="form-group">
     <div class="form-material floating">
-        <input class="form-control" type="number" value="{{ old('number_of_respondents') }}" id="number_of_respondents" name="number_of_respondents">
+{{--        <input class="form-control" type="number" value="{{ old('number_of_respondents') }}" id="number_of_respondents" name="number_of_respondents">--}}
+        <input class="form-control" type="number" value="2" id="number_of_respondents" name="number_of_respondents">
         <label for="number_of_respondents">Jumlah Responden</label>
     </div>
 </div>
 <div class="form-group">
     <label for="" class="mb-2 mt-10">Jenis Kelamin</label>
     <div class="custom-control custom-radio mb-2">
-        <input type="radio" id="gender" value="laki-laki" name="gender" class="custom-control-input">
+        <input type="radio" id="gender" value="laki-laki" name="gender" class="custom-control-input" checked>
         <label class="custom-control-label" for="gender">Laki - Laki</label>
     </div>
     <div class="custom-control custom-radio">
@@ -23,7 +25,8 @@
 </div>
 <div class="form-group">
     <div class="form-material floating">
-        <input class="form-control" value="{{ old('city') }}" type="text" id="city" name="city">
+{{--        <input class="form-control" value="{{ old('city') }}" type="text" id="city" name="city">--}}
+        <input class="form-control" value="bandung" type="text" id="city" name="city">
         <label for="city">Kota</label>
     </div>
     <span class="font-size-xs mt-2">Optional</span>
@@ -31,13 +34,15 @@
 
 <div class="form-group">
     <div class="form-material floating">
-        <textarea name="description" id="description" cols="30" class="form-control" rows="5">{{ old('description') }}</textarea>
+{{--        <textarea name="description" id="description" cols="30" class="form-control" rows="5">{{ old('description') }}</textarea>--}}
+        <textarea name="description" id="description" cols="30" class="form-control" rows="5">test</textarea>
         <label for="description">Deskripsi</label>
     </div>
 </div>
 <div class="form-group">
     <div class="form-material floating">
-        <input class="form-control" type="text" value="{{ old('respondent_fee') }}" id="respondent_fee" name="respondent_fee">
+{{--        <input class="form-control" type="number" value="{{ old('respondent_fee') }}" id="respondent_fee" name="respondent_fee">--}}
+        <input class="form-control" type="number" value="7" id="respondent_fee" name="respondent_fee">
         <label for="respondent_fee">Insentif Responden</label>
     </div>
     <span class="text-danger">note: per orang</span>
@@ -62,7 +67,6 @@
                 let totalCost = subTotal + costAdmin
                 $("#total_cost").val(totalCost)
             })
-
         })
 
         $('#number_of_respondents').blur(function (e) {

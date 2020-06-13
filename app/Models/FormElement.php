@@ -19,4 +19,15 @@ class FormElement extends Model
         return $this->belongsTo(Form::class);
     }
 
+    public function listOptions()
+    {
+        return $this->hasMany(ListOption::class);
+    }
+
+    public function multiselect()
+    {
+        return $this->hasMany(Multiselect::class);
+    }
+
+
 }

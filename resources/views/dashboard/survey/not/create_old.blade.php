@@ -9,7 +9,9 @@
                <div class="js-wizard-validation-material block">
                    <!-- Step Tabs -->
                    <ul class="nav nav-tabs nav-tabs-alt nav-fill" role="tablist">
-
+                       <li class="nav-item">
+                           <a class="nav-link active" href="#wizard-validation-material-step1" data-toggle="tab">Buat Tugas</a>
+                       </li>
                        <li class="nav-item">
                            <a class="nav-link" href="#wizard-validation-material-step2" data-toggle="tab">Buat Survey</a>
                        </li>
@@ -23,18 +25,21 @@
                    <!-- END Step Tabs -->
 
                    <!-- Form -->
-                   <form class="js-wizard-validation-material-form" action="{{ route('surveys.store', request('taskId')) }}" method="post" id="form-survey">
+                   <form class="js-wizard-validation-material-form" action="{{ route('tasks.store') }}" method="post">
                     @csrf
                    <!-- Steps Content -->
                        <div class="block-content block-content-full tab-content" style="min-height: 267px;">
                            <!-- Step 1 -->
+                           <div class="tab-pane active" id="wizard-validation-material-step1" role="tabpanel">
+                                @include('dashboard.survey.create_task')
 
+                           </div>
                            <!-- END Step 1 -->
 
                            <!-- Step 2 -->
                            <div class="tab-pane" id="wizard-validation-material-step2" role="tabpanel">
 
-                                    @include('dashboard.survey.custom_form')
+                                    @include('dashboard.survey.template_form_old')
 
 
                            </div>
@@ -82,7 +87,21 @@
                </div>
                <!-- END Validation Wizard 2 -->
            </div>
-
+{{--           <div class="col-md-2">--}}
+{{--               <div class="block block-bordered">--}}
+{{--                   <div class="block-content">--}}
+{{--                       <h3 class="block-title mb-5">Panel</h3>--}}
+{{--                       <ul class="list-unstyled">--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Short Text</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Long Text</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Radio</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Checkbox</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">Select</button></li>--}}
+{{--                           <li><button type="button" class="btn btn-sm btn-outline-primary panel-form">File</button></li>--}}
+{{--                       </ul>--}}
+{{--                   </div>--}}
+{{--               </div>--}}
+{{--           </div>--}}
 
        </div>
    </div>

@@ -24,9 +24,6 @@ class CreateTasksTable extends Migration
             $table->text('description');
             $table->double('respondent_fee');
             $table->double('total_cost');
-            $table->string('link_google_form');
-            $table->text('embed_google_form');
-            $table->text('closing_sentence')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->timestamps();

@@ -10,14 +10,6 @@ class UserController extends Controller
 {
 
 
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-
     public function edit(User $user)
     {
         return view('dashboard.profile.edit', compact('user'));
@@ -26,27 +18,36 @@ class UserController extends Controller
 
     public function update(User $user)
     {
+
+
         $password = request('password');
         if (isset($password)){
+            \request()->validate([
+                'password' => 'required|string|confirmed'
+            ]);
             $user->update([
-                'name' => \request('name'),
-                'email' => \request('email'),
                 'password' => bcrypt(\request('password'))
             ]);
+            Session::flash('success', 'Updated password successfully');
         } else {
+          request()->validate([
+                'name' => 'required|string',
+                'email' => 'required|unique:users,email,'.$user->id,
+            ]);
             $user->update([
                 'name' => \request('name'),
                 'email' => \request('email'),
+                'phone' => \request('phone'),
+                'address' => \request('address'),
             ]);
+
+            Session::flash('success', 'Updated profil successfully');
         }
 
 
-        Session::flash('success', 'Profi Berhasil diperbarui');
+
         return redirect()->back();
     }
 
-    public function destroy($id)
-    {
-        //
-    }
+
 }

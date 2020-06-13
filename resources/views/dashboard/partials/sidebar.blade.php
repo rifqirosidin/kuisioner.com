@@ -89,7 +89,7 @@
                     <a href="{{ route('tasks.index') }}"><i class="fa fa-tasks"></i><span class="sidebar-mini-hide">Daftar Tugas</span></a>
                 </li>
                 <li>
-                    <a href="{{ route('surveys.create') }}"><i class="si si-note"></i><span class="sidebar-mini-hide">Buat Survey</span></a>
+                    <a href="{{ route('tasks.create') }}"><i class="si si-note"></i><span class="sidebar-mini-hide">Buat Suvey</span></a>
                 </li>
                 <li>
                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i><span

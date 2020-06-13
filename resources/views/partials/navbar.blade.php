@@ -8,7 +8,7 @@
             <!-- Sidebar Content -->
             <div class="sidebar-content">
                 <!-- Side Header -->
-                <div class="content-header content-header-fullrow bg-white">
+                <div class="content-header content-header-fullrow ">
                     <div class="content-header-section text-center align-parent">
                         <!-- Close Sidebar, Visible only on mobile screens -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
@@ -20,7 +20,7 @@
                         <!-- Logo -->
                         <div class="content-header-item">
                             <a class="link-effect font-w700" href="/">
-                                <h2 class="text-warning">TitipMasa</h2>
+                                <h2 class="text-warning">Kuisioner.com</h2>
                             </a>
                         </div>
                         <!-- END Logo -->
@@ -83,7 +83,7 @@
         <!-- END Sidebar -->
 
         <!-- Header -->
-        <header id="page-header" class="bg-corporate-dark-op shadow-sm">
+        <header id="page-header" class="bg-corporate-dark-op shadow-sm navbar-fixed-top">
             <!-- Header Content -->
             <div class="content-header">
                 <!-- Left Section -->
@@ -100,22 +100,22 @@
                 <div class="content-header-section">
                     <ul class="nav-main-header">
                         <li>
-                            <a href="/">Responden</a>
+                            <a href="/" class="nav-link">Responden</a>
                         </li>
                         <li>
-                            <a href="/">Surveyor</a>
+                            <a href="/" class="nav-link">Surveyor</a>
                         </li>
                         <li>
-                            <a href="/">Tentang Kami</a>
+                            <a href="/" class="nav-link">Tentang Kami</a>
                         </li>
                         <li>
-                            <a href="/">Kontak</a>
+                            <a href="/" class="nav-link">Kontak</a>
                         </li>
 
                     @if(auth()->check())
 
                             <li>
-                                <a  class="nav-submenu text-black menu_titipmasa" data-toggle="nav-submenu" href="#" >{{ auth()->user()->name }}</a>
+                                <a  class="nav-submenu text-white menu_titipmasa" data-toggle="nav-submenu" href="#" >{{ auth()->user()->name }}</a>
                                 <ul class="submenu">
                                     <li>
                                         <a class="text-white" href="{{ route('logout') }}"
@@ -203,12 +203,12 @@
 
 @push('js')
     <script>
-        $(function () {
-            $(document).scroll(function () {
-                var $nav = $(".navbar-fixed-top");
-                $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-            });
-        });
+        // $(function () {
+        //     $(document).scroll(function () {
+        //         var $nav = $(".navbar-fixed-top");
+        //         $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+        //     });
+        // });
     </script>
 @endpush
 
