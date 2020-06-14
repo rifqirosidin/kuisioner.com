@@ -89,8 +89,13 @@
                     <a href="{{ route('tasks.index') }}"><i class="fa fa-tasks"></i><span class="sidebar-mini-hide">Daftar Tugas</span></a>
                 </li>
                 <li>
-                    <a href="{{ route('tasks.create') }}"><i class="si si-note"></i><span class="sidebar-mini-hide">Buat Suvey</span></a>
+                    <a href="{{ route('tasks.create') }}"><i class="si si-note"></i><span class="sidebar-mini-hide">Buat Tugas</span></a>
                 </li>
+
+                <li>
+                    <a href="{{ route('payments.index') }}"><i class="fa fa-money"></i><span class="sidebar-mini-hide">Verifikasi Pembayaran</span></a>
+                </li>
+
                 <li>
                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i><span
                             class="sidebar-mini-hide">Pengaturan</span></a>

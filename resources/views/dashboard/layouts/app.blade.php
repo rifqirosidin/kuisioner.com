@@ -1,6 +1,8 @@
 @extends('layouts.codebase')
 @section('content')
-    
+    @push('css_before')
+        <link rel="stylesheet" href="{{ asset('vendor/assets/js/plugins/datatables/dataTables.bootstrap4.css') }}">
+    @endpush
 
     <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-modern main-content-boxed">
         <aside id="side-overlay">

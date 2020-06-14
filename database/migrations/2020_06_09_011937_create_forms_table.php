@@ -17,6 +17,7 @@ class CreateFormsTable extends Migration
             $table->id();
             $table->foreignId('task_id')->constrained()->onDelete('CASCADE');
             $table->text('closing_sentence')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

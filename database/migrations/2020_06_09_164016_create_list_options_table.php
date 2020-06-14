@@ -15,7 +15,7 @@ class CreateListOptionsTable extends Migration
     {
         Schema::create('list_options', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_element_id')->constrained();
+            $table->foreignId('form_element_id')->constrained()->onDelete('CASCADE');
             $table->string('value');
             $table->string('type');
             $table->timestamps();

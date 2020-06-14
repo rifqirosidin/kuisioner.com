@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePayment;
 use App\Models\ElementType;
 use App\Models\Form;
 use App\Models\FormElement;
 use App\Models\FormSubmit;
 use App\Models\ListOption;
+use App\Models\Payment;
+use App\Models\PaymentMethod;
 use App\Models\Task;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
 
 class SurveyController extends Controller
@@ -25,38 +29,41 @@ class SurveyController extends Controller
 
     public function create($taskId)
     {
-       $form = $this->checkTask($taskId);
-       if (isset($form)){
+       $task = $this->checkTask($taskId);
+       if (isset($task->form)){
+//           Session::flash('success', 'Survey already exist');
 //           return redirect()->route('tasks.index');
        }
-        return view('dashboard.survey.create', compact('taskId'));
+
+      $paymentMethods = PaymentMethod::all();
+        return view('dashboard.survey.create', compact('task','paymentMethods'));
     }
 
     public function checkTask($id)
     {
-        $task = Task::where(['id' => $id, 'user_id' => auth()->id()])->first();
-        $form = Form::where('task_id', $id)->first();
+        $task = Task::with('form')->where(['id' => $id, 'user_id' => auth()->id()])->first();
+
         if (!isset($task)){
             abort(404);
         }
-        if (isset($form)){
-            Session::flash('success', 'Survey already exist');
-        }
-        return $form;
+
+        return $task;
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $taskId, StorePayment $payment)
     {
         $TYPE_RADIO = 'radio';
         $TYPE_CHECKBOX = 'checkbox';
         $TYPE_SELECT = 'select';
         $length = \request('label-question');
-        $taskId = \request()->route('taskId');
+//        $taskId = \request()->route('taskId');
 
         $input = $request->all();
 //        return $input;
         DB::beginTransaction();
         try {
+             $this->storePayment($payment,$taskId);
+
             $form = Form::firstOrCreate(
                 ['task_id' => $taskId],
                 [
@@ -116,6 +123,26 @@ class SurveyController extends Controller
             return $exception;
         }
 
+
+    }
+
+
+
+    public function storePayment(StorePayment $payment, $taskId)
+    {
+       $validated = $payment->validated();
+       $userId =  Auth::id();
+        $task = $this->checkTask($taskId);
+       if (\request()->file('proof_of_payment')){
+           $file = \request()->file('proof_of_payment');
+           $validated['user_id'] = $userId;
+           $validated['task_id'] =  $taskId;
+           $validated['proof_of_payment'] =  \request()->file('proof_of_payment')->store('payment');
+           $validated['amount'] =  $task->total_cost;
+
+       }
+
+      Payment::create($validated);
 
     }
 

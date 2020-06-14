@@ -27,9 +27,7 @@ Route::middleware('auth')->group(function (){
     Route::resource('users', 'UserController');
     Route::get('tasks/{taskId}/show-form', 'TaskController@showForm')->name('show.form');
     Route::resource('tasks', 'TaskController');
-    Route::resource('banners', 'BannerController');
-    Route::resource('testimonies', 'TestimonyController');
-    Route::resource('sliders', 'SliderController');
+
     Route::resource('payment-methods', 'PaymentMethodController');
     Route::post('surveys/create/form', 'SurveyController@storeForm')->name('create.form');
     Route::post('surveys/submit/form/{formId}', 'SurveyController@submitForm')->name('survey.form');
@@ -37,5 +35,11 @@ Route::middleware('auth')->group(function (){
     Route::post('surveys/create/{taskId}', 'SurveyController@store')->name('surveys.store');
     Route::get('surveys/closing-sentence/{formId}', 'SurveyController@closingSentence')->name('closing.sentence');
 
+
+    //admin
+    Route::resource('banners', 'BannerController');
+    Route::resource('testimonies', 'TestimonyController');
+    Route::resource('sliders', 'SliderController');
+    Route::resource('payments', 'PaymentController');
 });
 

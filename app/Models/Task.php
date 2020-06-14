@@ -24,4 +24,9 @@ class Task extends Model
     {
         return Carbon::parse($this->created_at)->format('D, d M Y');
     }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
 }

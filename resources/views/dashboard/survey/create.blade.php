@@ -23,7 +23,7 @@
                    <!-- END Step Tabs -->
 
                    <!-- Form -->
-                   <form class="js-wizard-validation-material-form" action="{{ route('surveys.store', request('taskId')) }}" method="post" id="form-survey">
+                   <form class="js-wizard-validation-material-form" action="{{ route('surveys.store', $task->id) }}" method="post" enctype="multipart/form-data" id="form-survey">
                     @csrf
                    <!-- Steps Content -->
                        <div class="block-content block-content-full tab-content" style="min-height: 267px;">
@@ -97,5 +97,11 @@
     <!-- Page JS Code -->
     <script src="{{ asset('vendor/assets/js/pages/be_forms_wizard.min.js') }}"></script>
 
+    <script>
 
+        // window.onbeforeunload = function(e) {
+        //     return 'Dialog text here.';
+        // };
+
+    </script>
 @endpush

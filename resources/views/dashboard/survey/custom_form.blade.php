@@ -277,9 +277,17 @@
             }
 
         })
-        if (fieldEmpty <= 0){
-            $("#form-survey").submit()
+        let paymentMethodId = $(" input[name='payment_method_id']").val();
+        let proofOfPayment = $(" input[name='proof_of_payment']").val();
+        if (paymentMethodId != '' && proofOfPayment != ''){
+            if (fieldEmpty <= 0){
+                $("#form-survey").submit()
+            }
+        } else {
+            alert("Field Payment harus diisi")
         }
+
+
 
     })
 </script>

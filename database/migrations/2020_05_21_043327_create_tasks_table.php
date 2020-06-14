@@ -24,6 +24,7 @@ class CreateTasksTable extends Migration
             $table->text('description');
             $table->double('respondent_fee');
             $table->double('total_cost');
+            $table->boolean('is_active')->default(0);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->timestamps();
