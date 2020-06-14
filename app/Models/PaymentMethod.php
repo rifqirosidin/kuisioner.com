@@ -8,8 +8,8 @@ class PaymentMethod extends Model
 {
     protected $guarded = [];
 
-    public function payment()
+    public function payments()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->hasMany(Payment::class);
     }
 }

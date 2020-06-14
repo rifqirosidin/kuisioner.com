@@ -64,29 +64,28 @@
 <div class="row bg-gray-light mb-30">
     <div class="col-md-12">
         <div id="testimonial-slider" class="owl-carousel">
-            <div class="testimonial">
-                <i class="icon">"</i>
-                <p class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac condimentum mi, vitae iaculis ante. Suspendisse viverra urna quis diam sodales, convallis auctor nibh.
-                </p>
+{{--            <div class="testimonial">--}}
+{{--                <i class="icon">"</i>--}}
+{{--                <p class="description">--}}
+{{--                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac condimentum mi, vitae iaculis ante. Suspendisse viverra urna quis diam sodales, convallis auctor nibh.--}}
+{{--                </p>--}}
 {{--                <div class="pic">--}}
 {{--                    <img src="images/img-1.jpg" alt="">--}}
 {{--                </div>--}}
-                <h3 class="testimonial-title">williamson</h3>
-                <span class="post">Web Developer</span>
-            </div>
+{{--                <h3 class="testimonial-title">williamson</h3>--}}
+{{--                <span class="post">Web Developer</span>--}}
+{{--            </div>--}}
 
+            @foreach($testimonies as $testimony)
             <div class="testimonial">
                 <i class="icon">"</i>
                 <p class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac condimentum mi, vitae iaculis ante. Suspendisse viverra urna quis diam sodales, convallis auctor nibh.
+                    {{ $testimony->content }}
                 </p>
-{{--                <div class="pic">--}}
-{{--                    <img src="images/img-2.jpg" alt="">--}}
-{{--                </div>--}}
-                <h3 class="testimonial-title">kristiana</h3>
-                <span class="post">Web Designer</span>
+                <h3 class="testimonial-title">{{ $testimony->name }}</h3>
+{{--                <span class="post">Web Designer</span>--}}
             </div>
+            @endforeach
         </div>
     </div>
 </div>

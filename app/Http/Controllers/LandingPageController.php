@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Slider;
+use App\Models\Task;
 use App\Models\Testimony;
 use Illuminate\Http\Request;
 
@@ -18,33 +19,10 @@ class LandingPageController extends Controller
         return view('landing_page.index', compact('sliders', 'testimonies' ,'banner'));
     }
 
-    public function create()
+    public function listSurvey()
     {
-        //
-    }
+        $tasks = Task::with(['user', 'form.formElements.listOptions'])->latest()->get();
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        return view('list_survey.index', compact('tasks'));
     }
 }

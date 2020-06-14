@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Testimony;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +18,6 @@ class DatabaseSeeder extends Seeder
          $this->call(BannerSeeder::class);
          $this->call(PaymentMethodSeeder::class);
          $this->call(TaskSeeder::class);
+         $this->call(Testimony::class);
     }
 }

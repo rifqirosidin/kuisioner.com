@@ -12,7 +12,7 @@
                             <!-- Header -->
                             <div class="py-30 text-center">
                                 <a class="link-effect font-w700" href="/">
-                                    <span class="font-size-xl text-primary-dark">Online</span><span class="font-size-xl">Tester</span>
+                                    <span class="font-size-xl text-primary-dark">Kuisioner</span><span class="font-size-xl">.com</span>
                                 </a>
                                 <h2 class="h5 font-w400 text-muted mb-0">Please enter your email</h2>
                             </div>

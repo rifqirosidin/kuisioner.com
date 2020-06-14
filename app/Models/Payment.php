@@ -9,9 +9,9 @@ class Payment extends Model
 {
     protected $guarded = [];
 
-    public function paymentMethods()
+    public function paymentMethod()
     {
-        return $this->hasMany(PaymentMethod::class);
+        return $this->belongsTo(PaymentMethod::class);
     }
     
     public function user()
@@ -23,4 +23,6 @@ class Payment extends Model
     {
         return $this->belongsTo(Task::class);
     }
+
+
 }

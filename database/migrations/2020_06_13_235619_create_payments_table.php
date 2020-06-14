@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('task_id')->constrained();
             $table->foreignId('payment_method_id')->constrained();
-            $table->boolean('status')->default(0);
+            $table->string('status', 50)->default('unverified');
             $table->string('proof_of_payment');
             $table->double('amount');
             $table->timestamps();

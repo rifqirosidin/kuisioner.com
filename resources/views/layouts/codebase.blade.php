@@ -56,7 +56,7 @@
 <script src="{{ asset('vendor/assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
 <!-- Page JS Code -->
-<script src="{{ asset('vendor/assets/js/pages/be_ui_activity.min.js') }}"></script>
+{{--<script src="{{ asset('vendor/assets/js/pages/be_ui_activity.min.js') }}"></script>--}}
 
 <!-- Page JS Helpers (BS Notify Plugin) -->
 @include('include.notify')

@@ -71,31 +71,31 @@ class BeUIActivity {
         });
 
         // Init an example confirm alert on button click
-        jQuery('.js-swal-confirm').on('click', e => {
-            toast({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this imaginary file!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d26a5c',
-                confirmButtonText: 'Yes, delete it!',
-                html: false,
-                preConfirm: e => {
-                    return new Promise(resolve => {
-                        setTimeout(() => {
-                            resolve();
-                        }, 50);
-                    });
-                }
-            }).then(result => {
-                if (result.value) {
-                    toast('Deleted!', 'Your imaginary file has been deleted.', 'success');
-                    // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-                } else if (result.dismiss === 'cancel') {
-                    toast('Cancelled', 'Your imaginary file is safe :)', 'error');
-                }
-            });
-        });
+        // jQuery('.js-swal-confirm').on('click', e => {
+        //     toast({
+        //         title: 'Are you sure?',
+        //         text: 'You will not be able to recover this imaginary file!',
+        //         type: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#d26a5c',
+        //         confirmButtonText: 'Yes, delete it!',
+        //         html: false,
+        //         preConfirm: e => {
+        //             return new Promise(resolve => {
+        //                 setTimeout(() => {
+        //                     resolve();
+        //                 }, 50);
+        //             });
+        //         }
+        //     }).then(result => {
+        //         if (result.value) {
+        //             toast('Deleted!', 'Your imaginary file has been deleted.', 'success');
+        //             // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+        //         } else if (result.dismiss === 'cancel') {
+        //             toast('Cancelled', 'Your imaginary file is safe :)', 'error');
+        //         }
+        //     });
+        // });
     }
 
     /*

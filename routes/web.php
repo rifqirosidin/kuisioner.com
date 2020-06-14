@@ -17,10 +17,9 @@ Route::get('analytic', function(){
 });
 
 Route::get('/','LandingPageController@index')->name('index');
+Route::get('/list/survey','LandingPageController@listSurvey')->name('list.survey');
 
 Auth::routes();
-
-
 Route::middleware('auth')->group(function (){
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
@@ -40,6 +39,7 @@ Route::middleware('auth')->group(function (){
     Route::resource('banners', 'BannerController');
     Route::resource('testimonies', 'TestimonyController');
     Route::resource('sliders', 'SliderController');
+    Route::patch('verify/payments', 'PaymentController@verifyPayment')->name('verify.payment');
     Route::resource('payments', 'PaymentController');
 });
 

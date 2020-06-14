@@ -60,6 +60,9 @@
                                             @csrf
                                         </form>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                                    </li>
                                 </ul>
                             </li>
 
@@ -103,7 +106,7 @@
                             <a href="/" class="nav-link">Responden</a>
                         </li>
                         <li>
-                            <a href="/" class="nav-link">Surveyor</a>
+                            <a href="{{ route('list.survey') }}" class="nav-link">Surveyor</a>
                         </li>
                         <li>
                             <a href="/" class="nav-link">Tentang Kami</a>
@@ -127,6 +130,9 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dashboard') }}">Dashboard</a>
                                     </li>
                                 </ul>
                             </li>

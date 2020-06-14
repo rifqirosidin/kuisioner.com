@@ -15,29 +15,33 @@
                             <tr>
                                 <th class="text-center"></th>
                                 <th>Name</th>
-                                <th class="d-none d-sm-table-cell">Email</th>
+
                                 <th class="d-none d-sm-table-cell" width="15%">Bukti Pembayaran</th>
-                                <th class="d-none d-sm-table-cell" style="width: 15%;">Status</th>
+                                <th class="d-none d-sm-table-cell" width="15%">Metode Pembayaran</th>
+                                <th class="d-none d-sm-table-cell" width="10%">Jumlah uang</th>
+                                <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
                                 <th class="text-center" style="width: 15%;">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($payments as $payment)
+                            @foreach($tasks as $task)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="font-w600">{{ $payment->user->name }}</td>
-                                    <td class="d-none d-sm-table-cell">{{ $payment->user->email }}</td>
-                                    <td><img width="80" height="80" src="{{ asset('storage/' . $payment->proof_of_payment) }}" alt=""></td>
+                                    <td class="font-w600">{{ $task->user->name }}</td>
+
+                                    <td><img width="80" height="80" src="{{ asset('storage/' . $task->payment->proof_of_payment) }}" alt=""></td>
+                                    <td>{{ $task->payment->paymentMethod->name }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $task->payment->amount }}</td>
                                     <td class="d-none d-sm-table-cell">
-                                        <span class="badge  {{ $payment->task->is_active != '1' ? 'badge-danger': 'badge-success'  }}">
-                                            {{ $payment->task->is_active != '1' ? 'Nonactive': 'Active'  }}
+                                        <span class="badge  {{ $task->payment->status != 'verified' ? 'badge-danger': 'badge-success'  }}">
+                                            {{ $task->payment->status  }}
                                         </span>
 
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex mx-10">
-                                            <button class="btn btn-sm btn-success mr-5">Terima</button>
-                                            <button class="btn btn-sm btn-danger">Tolak</button>
+                                            <button type="button" class="btn btn-sm btn-success mr-5 receive js-swal-confirm" data-task_id="{{ $task->id }}">Terima</button>
+                                            <button type="button" class="btn btn-sm btn-danger reject" data-task_id="{{ $task->id }}">Tolak</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -52,3 +56,91 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        let toast = swal.mixin({
+            buttonsStyling: false,
+            confirmButtonClass: 'btn btn-lg btn-alt-success m-5',
+            cancelButtonClass: 'btn btn-lg btn-alt-danger m-5',
+            inputClass: 'form-control'
+        });
+
+
+
+        jQuery('.receive').on('click', e => {
+            let taskId = $(".receive").data('task_id')
+            console.log(taskId)
+            const TYPE = 'receive';
+            toast({
+                title: 'Apakah anda yakin?',
+                text: 'Menerima bukti pembayaran ini!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d26a5c',
+                confirmButtonText: 'Terima!',
+                html: false,
+                preConfirm: e => {
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            resolve();
+                        }, 50);
+                    });
+                }
+            }).then(result => {
+                if (result.value) {
+
+                    ajaxVerifyPayment(taskId, TYPE)
+                    // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                } else if (result.dismiss === 'cancel') {
+                    toast('Cancelled', 'Your imaginary file is safe :)', 'error');
+                }
+            });
+        });
+
+
+        jQuery('.reject').on('click', e => {
+            let taskId = $(".reject").data('task_id')
+            const TYPE = 'reject';
+            toast({
+                title: 'Apakah anda yakin?',
+                text: 'Menolak bukti pembayaran ini!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d26a5c',
+                confirmButtonText: 'Tolak!',
+                html: false,
+                preConfirm: e => {
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            resolve();
+                        }, 50);
+                    });
+                }
+            }).then(result => {
+                if (result.value) {
+                    ajaxVerifyPayment(taskId, TYPE)
+                    // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                } else if (result.dismiss === 'cancel') {
+                    toast('Cancelled', 'Your imaginary file is safe :)', 'error');
+                }
+            });
+        });
+        function ajaxVerifyPayment(id, type) {
+            const URL = "{{ route('verify.payment') }}"
+            $.ajax({
+                type:"patch",
+                url: URL,
+                data: {
+                    task_id: id,
+                    type: type
+                },
+                success: function (data) {
+                    window.location.href = data
+                },
+                error: function (data) {
+
+                }
+            })
+        }
+    </script>
+@endpush
