@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="block">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Verifikasi Pembayaran</h3>
+                        <h3 class="block-title">Transaksi</h3>
                     </div>
                     <div class="block-content block-content-full">
                         <!-- DataTables functionality is initialized with .js-dataTable-full class in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
@@ -14,34 +14,36 @@
                             <thead>
                             <tr>
                                 <th class="text-center"></th>
-                                <th>Name</th>
+                                <th>Judul</th>
 
                                 <th class="d-none d-sm-table-cell" width="15%">Bukti Pembayaran</th>
                                 <th class="d-none d-sm-table-cell" width="15%">Metode Pembayaran</th>
                                 <th class="d-none d-sm-table-cell" width="10%">Jumlah uang</th>
                                 <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
+                                <th class="d-none d-sm-table-cell" style="width: 10%;">dibuat</th>
                                 <th class="text-center" style="width: 15%;">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($tasks as $task)
+                            @foreach($payments as $payment)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="font-w600">{{ $task->user->name }}</td>
+                                    <td class="font-w600">{{ $payment->task->title}}</td>
 
-                                    <td><img width="80" height="80" src="{{ asset('storage/' . $task->payment->proof_of_payment) }}" alt=""></td>
-                                    <td>{{ $task->payment->paymentMethod->name }}</td>
-                                    <td class="d-none d-sm-table-cell">{{ $task->payment->amount }}</td>
+                                    <td><img width="80" height="80" src="{{ asset('storage/' . $payment->proof_of_payment) }}" alt=""></td>
+                                    <td>{{ $payment->paymentMethod->name }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $payment->amount }}</td>
                                     <td class="d-none d-sm-table-cell">
-                                        <span class="badge  {{ $task->payment->status != 'verified' ? 'badge-danger': 'badge-success'  }}">
-                                            {{ $task->payment->status  }}
+                                        <span class="badge  {{ $payment->status != 'verified' ? 'badge-danger': 'badge-success'  }}">
+                                            {{ $payment->status  }}
                                         </span>
 
                                     </td>
+                                    <td>{{ $payment->created_at_format }}</td>
                                     <td class="text-center">
                                         <div class="d-flex mx-10">
-                                            <button type="button" class="btn btn-sm btn-success mr-5 receive js-swal-confirm" data-task_id="{{ $task->id }}">Terima</button>
-                                            <button type="button" class="btn btn-sm btn-danger reject" data-task_id="{{ $task->id }}">Tolak</button>
+                                            <a href="{{ route('transactions.edit', $payment->id) }}" class="btn btn-sm btn-success mr-5">Edit</a>
+                                            <button type="button" class="btn btn-sm btn-danger delete" data-payment_id="{{ $payment->id }}">Hapus</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -59,18 +61,15 @@
 @push('js')
     <script>
 
-
-        jQuery('.receive').on('click', e => {
-            let taskId = $(".receive").data('task_id')
-            console.log(taskId)
-            const TYPE = 'receive';
+        jQuery('.delete').on('click', e => {
+            let paymentId = $(".delete").data('payment_id')
             toast({
                 title: 'Apakah anda yakin?',
-                text: 'Menerima bukti pembayaran ini!',
+                text: 'Mengapus transaksi ini!',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d26a5c',
-                confirmButtonText: 'Terima!',
+                confirmButtonText: 'Delete!',
                 html: false,
                 preConfirm: e => {
                     return new Promise(resolve => {
@@ -82,7 +81,7 @@
             }).then(result => {
                 if (result.value) {
 
-                    ajaxVerifyPayment(taskId, TYPE)
+                    ajaxDeletePayment(paymentId)
                     // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
                 } else if (result.dismiss === 'cancel') {
                     toast('Cancelled', 'Your imaginary file is safe :)', 'error');
@@ -90,48 +89,17 @@
             });
         });
 
-
-        jQuery('.reject').on('click', e => {
-            let taskId = $(".reject").data('task_id')
-            const TYPE = 'reject';
-            toast({
-                title: 'Apakah anda yakin?',
-                text: 'Menolak bukti pembayaran ini!',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d26a5c',
-                confirmButtonText: 'Tolak!',
-                html: false,
-                preConfirm: e => {
-                    return new Promise(resolve => {
-                        setTimeout(() => {
-                            resolve();
-                        }, 50);
-                    });
-                }
-            }).then(result => {
-                if (result.value) {
-                    ajaxVerifyPayment(taskId, TYPE)
-                    // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-                } else if (result.dismiss === 'cancel') {
-                    toast('Cancelled', 'Your imaginary file is safe :)', 'error');
-                }
-            });
-        });
-        function ajaxVerifyPayment(id, type) {
-            const URL = "{{ route('verify.payment') }}"
+        function ajaxDeletePayment(id) {
+            let URL = "{{ route('transactions.destroy', ':paymentId') }}"
+            URL = URL.replace(':paymentId', id)
             $.ajax({
-                type:"patch",
+                type:"delete",
                 url: URL,
-                data: {
-                    task_id: id,
-                    type: type
-                },
                 success: function (data) {
                     window.location.href = data
                 },
                 error: function (data) {
-
+                    console.log(data)
                 }
             })
         }

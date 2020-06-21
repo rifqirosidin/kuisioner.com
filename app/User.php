@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Balance;
 use App\Models\Form;
 use App\Models\FormSubmit;
 use App\Models\Payment;
@@ -59,5 +60,10 @@ class User extends Authenticatable
     public function payment()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function balance()
+    {
+        return $this->hasOne(Balance::class);
     }
 }

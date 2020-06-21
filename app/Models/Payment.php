@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
@@ -24,5 +25,9 @@ class Payment extends Model
         return $this->belongsTo(Task::class);
     }
 
+    public function getCreatedAtFormatAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('D, d M Y');
+    }
 
 }

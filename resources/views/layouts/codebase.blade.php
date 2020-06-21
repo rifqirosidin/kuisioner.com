@@ -67,6 +67,12 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    let toast = swal.mixin({
+        buttonsStyling: false,
+        confirmButtonClass: 'btn btn-lg btn-alt-success m-5',
+        cancelButtonClass: 'btn btn-lg btn-alt-danger m-5',
+        inputClass: 'form-control'
+    });
 
 </script>
 {{--<script src="{{ asset('js/jquery-3.5.1.slim.min.js') }}"></script>--}}

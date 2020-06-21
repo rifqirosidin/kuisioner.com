@@ -2,6 +2,7 @@
 @section('content')
     @push('css_before')
         <link rel="stylesheet" href="{{ asset('vendor/assets/js/plugins/datatables/dataTables.bootstrap4.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/assets/js/plugins/select2/css/select2.min.css') }}">
     @endpush
 
     <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-modern main-content-boxed">
@@ -21,9 +22,12 @@
     @push('js')
         <script src="{{ asset('vendor/assets/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('vendor/assets/js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
+{{--        <script src="{{ asset('vendor/assets/js/pages/be_forms_plugins.min.js') }}"></script>--}}
+        <script src="{{ asset('vendor/assets/js/plugins/select2/js/select2.full.min.js') }}"></script>
         <!-- Page JS Code -->
         <script src="{{ asset('vendor/assets/js/pages/be_tables_datatables.min.js') }}"></script>
+        <script>jQuery(function(){ Codebase.helpers([ 'select2']); });</script>
+
     @endpush
 @endsection
 

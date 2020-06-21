@@ -18,6 +18,9 @@ class PaymentController extends Controller
 
     }
 
+
+
+
     public function verifyPayment()
     {
         $RECEIVE = 'receive';

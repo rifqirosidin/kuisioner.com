@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutUs;
 use App\Models\Banner;
 use App\Models\Slider;
 use App\Models\Task;
@@ -24,5 +25,17 @@ class LandingPageController extends Controller
         $tasks = Task::with(['user', 'form.formElements.listOptions'])->latest()->get();
 
         return view('list_survey.index', compact('tasks'));
+    }
+
+    public function aboutUs()
+    {
+        $aboutUs = AboutUs::first();
+        return view('landing_page.about_us', compact('aboutUs'));
+    }
+    public function contact()
+    {
+        $aboutUS = AboutUs::latest()->first();
+
+        return view('landing_page.contact',compact('aboutUS'));
     }
 }

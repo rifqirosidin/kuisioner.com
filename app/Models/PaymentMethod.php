@@ -12,4 +12,8 @@ class PaymentMethod extends Model
     {
         return $this->hasMany(Payment::class);
     }
+    public function topUpBalances()
+    {
+        return $this->hasMany(TopUpBalance::class);
+    }
 }

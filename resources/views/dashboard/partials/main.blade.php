@@ -8,6 +8,7 @@
             <div class="col-6 col-xl-4">
                 <a class="block block-link-shadow text-right" href="javascript:void(0)">
                     <div class="block-content block-content-full clearfix">
+
                         <div class="float-left mt-10 d-none d-sm-block">
                             <i class="fa fa-money fa-3x text-body-bg-dark"></i>
                         </div>
@@ -15,6 +16,7 @@
                              data-to="">0
                         </div>
                         <div class="font-size-sm font-w600 text-uppercase text-muted">Saldo</div>
+
                     </div>
                 </a>
             </div>

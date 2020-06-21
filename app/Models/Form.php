@@ -23,5 +23,9 @@ class Form extends Model
     {
         return $this->belongsTo(Task::class);
     }
+    public function formSubmits()
+    {
+        return $this->hasMany(FormSubmit::class);
+    }
 
 }

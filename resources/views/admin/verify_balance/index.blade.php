@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="block">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Verifikasi Pembayaran</h3>
+                        <h3 class="block-title">Verifikasi Saldo</h3>
                     </div>
                     <div class="block-content block-content-full">
                         <!-- DataTables functionality is initialized with .js-dataTable-full class in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
@@ -14,34 +14,36 @@
                             <thead>
                             <tr>
                                 <th class="text-center"></th>
-                                <th>Name</th>
-
-                                <th class="d-none d-sm-table-cell" width="15%">Bukti Pembayaran</th>
+                                <th class="d-none d-sm-table-cell" width="15%">User</th>
+                                <th class="d-none d-sm-table-cell" width="15%">Image</th>
+                                <th class="d-none d-sm-table-cell" width="15%">Uang</th>
+                                <th class="d-none d-sm-table-cell" width="10%">Jumlah Saldo</th>
                                 <th class="d-none d-sm-table-cell" width="15%">Metode Pembayaran</th>
-                                <th class="d-none d-sm-table-cell" width="10%">Jumlah uang</th>
                                 <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
                                 <th class="text-center" style="width: 15%;">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($tasks as $task)
+                            @foreach($topUps as $topUp)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="font-w600">{{ $task->user->name }}</td>
+                                    <td class="font-w600">{{ $topUp->user->name }}</td>
 
-                                    <td><img width="80" height="80" src="{{ asset('storage/' . $task->payment->proof_of_payment) }}" alt=""></td>
+                                    <td><img width="80" height="80" src="{{ asset('storage/' . $topUp->proof_of_payment) }}" alt=""></td>
                                     <td>{{ $task->payment->paymentMethod->name }}</td>
-                                    <td class="d-none d-sm-table-cell">{{ $task->payment->amount }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $topUp->price }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $topUp->amount_price }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $topUp->paymentMethod->name }}</td>
                                     <td class="d-none d-sm-table-cell">
-                                        <span class="badge  {{ $task->payment->status != 'verified' ? 'badge-danger': 'badge-success'  }}">
-                                            {{ $task->payment->status  }}
+                                        <span class="badge  {{ $topUp->status != 1 ? 'badge-danger': 'badge-success'  }}">
+                                            {{ $topUp->status  }}
                                         </span>
 
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex mx-10">
-                                            <button type="button" class="btn btn-sm btn-success mr-5 receive js-swal-confirm" data-task_id="{{ $task->id }}">Terima</button>
-                                            <button type="button" class="btn btn-sm btn-danger reject" data-task_id="{{ $task->id }}">Tolak</button>
+                                            <button type="button" class="btn btn-sm btn-success mr-5 receive js-swal-confirm" data-task_id="{{ $topUp->id }}">Terima</button>
+                                            <button type="button" class="btn btn-sm btn-danger reject" data-task_id="{{ $topUp->id }}">Tolak</button>
                                         </div>
                                     </td>
                                 </tr>

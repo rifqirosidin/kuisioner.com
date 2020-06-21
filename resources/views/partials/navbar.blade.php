@@ -103,16 +103,13 @@
                 <div class="content-header-section">
                     <ul class="nav-main-header">
                         <li>
-                            <a href="/" class="nav-link">Responden</a>
+                            <a href="{{ route('list.survey') }}" class="nav-link">Cari survey</a>
                         </li>
                         <li>
-                            <a href="{{ route('list.survey') }}" class="nav-link">Surveyor</a>
+                            <a href="{{ route('aboutUs') }}" class="nav-link">Tentang Kami</a>
                         </li>
                         <li>
-                            <a href="/" class="nav-link">Tentang Kami</a>
-                        </li>
-                        <li>
-                            <a href="/" class="nav-link">Kontak</a>
+                            <a href="{{ route('contact') }}" class="nav-link">Kontak</a>
                         </li>
 
                     @if(auth()->check())

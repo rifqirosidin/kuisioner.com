@@ -24,7 +24,8 @@ class SurveyController extends Controller
 
     public function index()
     {
-        //
+        $tasks = Task::with('user')->latest()->get();
+        return view('list_survey.index', compact('tasks'));
     }
 
     public function create($taskId)
@@ -159,7 +160,8 @@ class SurveyController extends Controller
 
     public function submitForm($formId)
     {
-        $json = json_encode(\request()->all());
+        $json = json_encode(\request()->except('_token'));
+
         FormSubmit::create([
            'form_id' => $formId,
             'value' => $json,

@@ -22,8 +22,13 @@
              </div>
          </div>
          <div class="tag-line-slider">
-             <h2 class="tag-line-title">{{ $banner->title }}</h2>
-             <p class="tag-line-desc">{{ $banner->description }}</p>
+             @if(isset( $banner->title))
+                 <h2 class="tag-line-title">{{ $banner->title }}</h2>
+                 <p class="tag-line-desc">{{ $banner->description }}</p>
+             @else
+                 <h2 class="tag-line-title">Berkerja di Rumah Sebagai Online Tester</h2>
+                 <p class="tag-line-desc">Dengan Kuisioner.com anda akan mudah mendapatkan uang hanya bermodalkan gadger atau laptop dari rumah</p>
+             @endif
          </div>
 
      </header>

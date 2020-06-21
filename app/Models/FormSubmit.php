@@ -14,5 +14,10 @@ class FormSubmit extends Model
         return $this->belongsTo(User::class, 'submit_by_user_id');
     }
 
+    public function form()
+    {
+        return $this->belongsTo(Form::class);
+    }
+
 
 }
