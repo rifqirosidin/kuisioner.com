@@ -52,8 +52,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/form/respondents', 'TaskController@displayRespondent')->name('display.respondent.update');
     Route::get('ajax/price-balances', 'PriceBalanceController@ajaxPriceBalance')->name('ajax.price.balance');
     Route::resource('price-balances', 'PriceBalanceController');
-    Route::patch('verify/receive-balances', 'TopUpBalanceController@ajaxVerified')->name('verify.balance');
-    Route::patch('verify/reject-balances', 'TopUpBalanceController@ajaxVerified')->name('reject.balance');
+    Route::patch('verify/receive-balances', 'TopUpBalanceController@ajaxVerified')->name('receive.balance');
+    Route::patch('verify/reject-balances', 'TopUpBalanceController@ajaxUnVerified')->name('reject.balance');
 
 });
 

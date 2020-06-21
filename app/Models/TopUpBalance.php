@@ -23,4 +23,8 @@ class TopUpBalance extends Model
     {
         return $this->belongsTo(PaymentMethod::class);
     }
+    public function scopeActive($query)
+    {
+        return $query->where('status', 0);
+    }
 }

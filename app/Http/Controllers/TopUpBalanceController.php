@@ -16,7 +16,7 @@ class TopUpBalanceController extends Controller
 
     public function index()
     {
-        $topUps = TopUpBalance::with(['user', 'paymentMethod'])->latest()->get();
+        $topUps = TopUpBalance::with(['user', 'paymentMethod'])->active()->latest()->get();
         return view('admin.verify_balance.index', compact('topUps'));
     }
 
@@ -54,24 +54,32 @@ class TopUpBalanceController extends Controller
         if (\request()->ajax()){
             try {
                 $id = \request('id');
-                $userId = \request('userId');
+                $userId = \request('user_id');
                 $topUp = TopUpBalance::find($id);
                 $topUp->update([
                     'status' => 1
                 ]);
 
                 $oldBalance = Balance::where('user_id', $userId)->first();
-                $currentBalance = $oldBalance + \request('amount_balance');
+                if (isset($oldBalance)){
+                    $oldBalance = $oldBalance->amount;
+                }else {
+                    $oldBalance = 0;
+                }
+                $currentBalance =  $oldBalance + \request('amount_balance');
 
-                Balance::updateOrCreate([
-                    ['user_id' => $userId],
+                Balance::updateOrCreate(
+                    [
+                        'user_id' => $userId ],
                     [
                         'user_id' => $userId,
                         'amount' => $currentBalance
                     ]
-                ]);
+                );
                 DB::commit();
+                Session::flash('success', 'Terima pembayaran sukses');
             }catch (\Exception $exception){
+                return $exception;
                 DB::rollBack();
             }
             return route('top-up.index');
@@ -91,8 +99,9 @@ class TopUpBalanceController extends Controller
 
 
             }catch (\Exception $exception){
-
+                return $exception;
             }
+            Session::flash('success', 'Tolak pembayaran sukses');
             return route('top-up.index');
 
         }

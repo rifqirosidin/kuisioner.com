@@ -30,20 +30,22 @@
                                     <td class="font-w600">{{ $topUp->user->name }}</td>
 
                                     <td><img width="80" height="80" src="{{ asset('storage/' . $topUp->proof_of_payment) }}" alt=""></td>
-                                    <td>{{ $task->payment->paymentMethod->name }}</td>
-                                    <td class="d-none d-sm-table-cell">{{ $topUp->price }}</td>
-                                    <td class="d-none d-sm-table-cell">{{ $topUp->amount_price }}</td>
+                                    <td>{{  $topUp->price }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $topUp->amount_balance }}</td>
                                     <td class="d-none d-sm-table-cell">{{ $topUp->paymentMethod->name }}</td>
+
                                     <td class="d-none d-sm-table-cell">
                                         <span class="badge  {{ $topUp->status != 1 ? 'badge-danger': 'badge-success'  }}">
-                                            {{ $topUp->status  }}
+                                           {{ $topUp->status != 1 ? 'unverified': 'verified'  }}
                                         </span>
 
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex mx-10">
-                                            <button type="button" class="btn btn-sm btn-success mr-5 receive js-swal-confirm" data-task_id="{{ $topUp->id }}">Terima</button>
-                                            <button type="button" class="btn btn-sm btn-danger reject" data-task_id="{{ $topUp->id }}">Tolak</button>
+                                            <button type="button" class="btn btn-sm btn-success mr-5 receive js-swal-confirm"
+                                                    data-amount_balance="{{ $topUp->amount_balance }}" data-user_id="{{ $topUp->user_id }}" data-verify_id="{{ $topUp->id }}">Terima
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-danger reject" data-verify_id="{{ $topUp->id }}">Tolak</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -59,13 +61,12 @@
     </div>
 @endsection
 @push('js')
+
     <script>
-
-
         jQuery('.receive').on('click', e => {
-            let taskId = $(".receive").data('task_id')
-            console.log(taskId)
-            const TYPE = 'receive';
+            let id = $(".receive").data('verify_id')
+            let userId = $(".receive").data('user_id')
+            let amountBalance = $(".receive").data('amount_balance')
             toast({
                 title: 'Apakah anda yakin?',
                 text: 'Menerima bukti pembayaran ini!',
@@ -84,7 +85,23 @@
             }).then(result => {
                 if (result.value) {
 
-                    ajaxVerifyPayment(taskId, TYPE)
+                    $.ajax({
+                        type:"patch",
+                        url: "{{ route('receive.balance') }}",
+                        data: {
+                            id: id,
+                            amount_balance: amountBalance,
+                            user_id: userId
+
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            window.location.href = data
+                        },
+                        error: function (data) {
+
+                        }
+                    })
                     // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
                 } else if (result.dismiss === 'cancel') {
                     toast('Cancelled', 'Your imaginary file is safe :)', 'error');
@@ -94,8 +111,8 @@
 
 
         jQuery('.reject').on('click', e => {
-            let taskId = $(".reject").data('task_id')
-            const TYPE = 'reject';
+            let id = $(".reject").data('verify_id')
+
             toast({
                 title: 'Apakah anda yakin?',
                 text: 'Menolak bukti pembayaran ini!',
@@ -113,24 +130,24 @@
                 }
             }).then(result => {
                 if (result.value) {
-                    ajaxVerifyPayment(taskId, TYPE)
+                    ajaxVerifyPayment(id)
                     // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
                 } else if (result.dismiss === 'cancel') {
                     toast('Cancelled', 'Your imaginary file is safe :)', 'error');
                 }
             });
         });
-        function ajaxVerifyPayment(id, type) {
-            const URL = "{{ route('verify.payment') }}"
+        function ajaxVerifyPayment(id) {
+            const URL = "{{ route('reject.balance') }}"
             $.ajax({
                 type:"patch",
                 url: URL,
                 data: {
-                    task_id: id,
-                    type: type
+                    id: id,
                 },
                 success: function (data) {
                     window.location.href = data
+
                 },
                 error: function (data) {
 

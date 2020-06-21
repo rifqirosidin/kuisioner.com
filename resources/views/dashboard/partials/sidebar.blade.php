@@ -92,7 +92,7 @@
                     <a href="{{ route('tasks.create') }}"><i class="si si-note"></i><span class="sidebar-mini-hide">Buat Tugas</span></a>
                 </li>
                 <li>
-                    <a href="{{ route('top-up.create') }}"><i class="si si-note"></i><span class="sidebar-mini-hide">Top Up</span></a>
+                    <a href="{{ route('top-up.create') }}"><i class="fa fa-arrow-circle-o-up"></i><span class="sidebar-mini-hide">Top Up</span></a>
                 </li>
                 <li>
                     <a href="{{ route('transactions.index') }}"><i class="si si-notebook"></i><span class="sidebar-mini-hide">Transaksi</span></a>
