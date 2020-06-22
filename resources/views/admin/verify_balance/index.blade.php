@@ -68,7 +68,7 @@
             let userId = $(".receive").data('user_id')
             let amountBalance = $(".receive").data('amount_balance')
             toast({
-                title: 'Apakah anda yakin?',
+                title: 'Apakah anda yakin?',php
                 text: 'Menerima bukti pembayaran ini!',
                 type: 'warning',
                 showCancelButton: true,

@@ -52,30 +52,41 @@ class TaskController extends Controller
     // hasil survey
     public function show(Task $task)
     {
-        $task= $task->with('form.formSubmits')->first();
+        $task= $task->with(['form.formSubmits','form.formElements'])->first();
 
         $result = collect($task->form->formSubmits);
+        $length = collect($task->form->formElements)->count();
+        $respondent = array();
+        foreach ($result as $key => $item) {
+            $respondent[$key] = json_decode($item->value, true);
+        }
+
+        $collect = collect($respondent);
+
+        $responses = array();
+        for ($i=0;$i<$length;$i++){
+            $responses[$i] = array($i+1 =>  $collect->pluck($i+1));
+        }
+
+//        return $responses;
 
 
-        $datas = array();
-        foreach ($result as $data){
-            $convert = json_encode($data->value, true);
-            array_push($datas, $data->value);
-        }
-        $removeEscape = array();
-        foreach ($datas as $key =>$item){
-           array_push($removeEscape, $item[$key]);
-        }
-        return $removeEscape;
-        return view('dashboard.task.result_survey', compact('task','datas'));
+        return view('dashboard.task.result_survey', compact('task','responses'));
     }
-    function escapeJsonString($value) {
-        # list from www.json.org: (\b backspace, \f formfeed)
-        $search = array("\n", "\r", "\u", "\t", "\f", "\b", "/", '"');
-        $replace = array("\\n", "\\r", "\\u", "\\t", "\\f", "\\b", "\/", "\"");
-        $result = str_replace($search, $replace, $value);
-        return $result;
-    }
+//    function group_by($key, $data) {
+//        $result = array();
+//
+//        foreach($data as $val) {
+//            if(array_key_exists($key, $val)){
+//                $result[$val[$key]][] = $val;
+////                $result[$val[$key]][] = $val;
+//            }else{
+//                $result[""][] = $val;
+//            }
+//        }
+//
+//        return $result;
+//    }
 
     public function showForm($taskId)
     {

@@ -24,7 +24,7 @@ class SurveyController extends Controller
 
     public function index()
     {
-        $tasks = Task::with('user')->latest()->get();
+        $tasks = Task::with('user')->active()->latest()->get();
         return view('list_survey.index', compact('tasks'));
     }
 

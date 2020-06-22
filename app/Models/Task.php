@@ -29,4 +29,9 @@ class Task extends Model
     {
         return $this->hasOne(Payment::class);
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 }

@@ -10,11 +10,11 @@
         </div>
         @foreach($tasks as $task)
         <div class="col-12">
-            <a class="block block-rounded block-link-shadow" href="javascript:void(0)">
+            <a class="block block-rounded block-link-shadow" href="{{ route('show.form', $task->id) }}">
                 <div class="block-content block-content-full">
                     <p class="font-size-sm text-muted float-sm-right mb-5"><em>{{ $task->created_at_format }}</em></p>
                     <h4 class="font-size-default text-primary mb-0">
-                        <i class="fa fa-newspaper-o text-muted mr-5"></i> {{ $task->title }}
+                        <i class="si si-note text-muted mr-5"></i> {{ $task->title }}
                     </h4>
                 </div>
             </a>
