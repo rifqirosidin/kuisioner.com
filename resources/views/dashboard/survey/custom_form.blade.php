@@ -268,6 +268,7 @@
         e.preventDefault()
         let display = 1
         let fieldEmpty = 0;
+
         $(".question").each(function (i) {
             if ($(this).val() == "" && display == 1) {
                 display++
@@ -277,14 +278,21 @@
             }
 
         })
-        let paymentMethodId = $(" input[name='payment_method_id']").val();
+
         let proofOfPayment = $(" input[name='proof_of_payment']").val();
+        let paymentMethodId = $(" input[name='payment_method_id']").val();
+
         if (paymentMethodId != '' && proofOfPayment != ''){
             if (fieldEmpty <= 0){
                 $("#form-survey").submit()
             }
         } else {
-            alert("Field Payment harus diisi")
+          if (paymentMethodId == 1){
+              $("#form-survey").submit()
+          }else {
+              alert("Field Payment harus diisi")
+          }
+
         }
 
 

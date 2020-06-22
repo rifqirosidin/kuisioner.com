@@ -68,7 +68,7 @@
             let userId = $(".receive").data('user_id')
             let amountBalance = $(".receive").data('amount_balance')
             toast({
-                title: 'Apakah anda yakin?',php
+                title: 'Apakah anda yakin?',
                 text: 'Menerima bukti pembayaran ini!',
                 type: 'warning',
                 showCancelButton: true,
@@ -86,7 +86,7 @@
                 if (result.value) {
 
                     $.ajax({
-                        type:"patch",
+                        type: "patch",
                         url: "{{ route('receive.balance') }}",
                         data: {
                             id: id,
@@ -108,8 +108,6 @@
                 }
             });
         });
-
-
         jQuery('.reject').on('click', e => {
             let id = $(".reject").data('verify_id')
 
@@ -140,7 +138,7 @@
         function ajaxVerifyPayment(id) {
             const URL = "{{ route('reject.balance') }}"
             $.ajax({
-                type:"patch",
+                type: "patch",
                 url: URL,
                 data: {
                     id: id,

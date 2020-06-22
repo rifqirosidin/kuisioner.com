@@ -15,13 +15,13 @@
                                 @foreach($task->form->formElements as $element)
                                     {{-- text--}}
                                     @if($element->element_type_id == 1)
-                                        <div class="form-group row">
+                                        <div class="form-group">
                                             <label for="title">{{ $element->name }}</label>
                                             <input class="form-control" type="text" name="{{ $element->column_id }}" {{ $element->is_required }}>
                                         </div>
                                         {{-- textarea --}}
                                     @elseif($element->element_type_id == 2)
-                                        <div class="form-group row">
+                                        <div class="form-group">
                                             <label for="{{ $element->name }}">{{ $element->name }}</label>
                                             <textarea name="{{ $element->column_id }}" id="{{ $element->name }}" class="form-control" cols="10" rows="4" {{ $element->is_required }}></textarea>
                                         </div>

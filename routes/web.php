@@ -24,11 +24,9 @@ Route::get('/contact','LandingPageController@contact')->name('contact');
 Auth::routes();
 Route::middleware('auth')->group(function (){
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-
     Route::resource('users', 'UserController');
     Route::get('tasks/{taskId}/show-form', 'TaskController@showForm')->name('show.form');
     Route::resource('tasks', 'TaskController');
-
     Route::resource('payment-methods', 'PaymentMethodController');
     Route::post('surveys/create/form', 'SurveyController@storeForm')->name('create.form');
     Route::post('surveys/submit/form/{formId}', 'SurveyController@submitForm')->name('survey.form');
@@ -37,23 +35,25 @@ Route::middleware('auth')->group(function (){
     Route::get('surveys/closing-sentence/{formId}', 'SurveyController@closingSentence')->name('closing.sentence');
     Route::resource('transactions', 'TransactionController');
     Route::resource('balances', 'BalanceController');
-
     Route::resource('top-up', 'TopUpBalanceController');
 
 
 
     //admin
-    Route::resource('banners', 'BannerController');
-    Route::resource('testimonies', 'TestimonyController');
-    Route::resource('about-us', 'AboutUsController');
-    Route::resource('sliders', 'SliderController');
-    Route::patch('verify/payments', 'PaymentController@verifyPayment')->name('verify.payment');
-    Route::resource('payments', 'PaymentController');
-    Route::get('/form/respondents', 'TaskController@displayRespondent')->name('display.respondent.update');
-    Route::get('ajax/price-balances', 'PriceBalanceController@ajaxPriceBalance')->name('ajax.price.balance');
-    Route::resource('price-balances', 'PriceBalanceController');
-    Route::patch('verify/receive-balances', 'TopUpBalanceController@ajaxVerified')->name('receive.balance');
-    Route::patch('verify/reject-balances', 'TopUpBalanceController@ajaxUnVerified')->name('reject.balance');
+    Route::middleware('admin')->group(function (){
+        Route::resource('banners', 'BannerController');
+        Route::resource('testimonies', 'TestimonyController');
+        Route::resource('about-us', 'AboutUsController');
+        Route::resource('sliders', 'SliderController');
+        Route::patch('verify/payments', 'PaymentController@verifyPayment')->name('verify.payment');
+        Route::resource('payments', 'PaymentController');
+        Route::get('/form/respondents', 'TaskController@displayRespondent')->name('display.respondent.update');
+        Route::get('ajax/price-balances', 'PriceBalanceController@ajaxPriceBalance')->name('ajax.price.balance');
+        Route::resource('price-balances', 'PriceBalanceController');
+        Route::patch('verify/receive-balances', 'TopUpBalanceController@ajaxVerified')->name('receive.balance');
+        Route::patch('verify/reject-balances', 'TopUpBalanceController@ajaxUnVerified')->name('reject.balance');
+    });
+
 
 });
 

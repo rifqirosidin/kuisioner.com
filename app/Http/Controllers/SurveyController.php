@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePayment;
+use App\Models\Balance;
 use App\Models\ElementType;
 use App\Models\Form;
 use App\Models\FormElement;
@@ -32,12 +33,14 @@ class SurveyController extends Controller
     {
        $task = $this->checkTask($taskId);
        if (isset($task->form)){
-//           Session::flash('success', 'Survey already exist');
-//           return redirect()->route('tasks.index');
+           Session::flash('success', 'Survey already exist');
+           return redirect()->route('tasks.index');
        }
 
       $paymentMethods = PaymentMethod::all();
-        return view('dashboard.survey.create', compact('task','paymentMethods'));
+       $balance = Balance::where('user_id', Auth::id())->first();
+
+        return view('dashboard.survey.create', compact('task','paymentMethods','balance'));
     }
 
     public function checkTask($id)
@@ -112,36 +115,56 @@ class SurveyController extends Controller
                         $this->storeOptionElement($element->id, $value, $type);
                     }
                 }
+                $balance = Balance::where('user_id', Auth::id())->first();
+                $totalCost = request('total_cost');
+                if (\request('payment_method_id') == 1){
+                    if ($balance->amount >= $totalCost){
+                        $currentBalance = $balance->amount - $totalCost;
+                        $balance->update([
+                            'amount' => $currentBalance
+                        ]);
 
+                        Task::find($taskId)->update([
+                           'is_active' => 1
+                        ]);
 
+                    }else {
+                        Session::flash('error', 'Saldo anda tidak cukup silahkan Top Up');
+                        return redirect()->back();
+                    }
+
+                }
             }
             DB::commit();
             Session::flash('success', 'Created Survey Successfully');
-            return redirect()->back();
+            return redirect()->route('tasks.index');
 //            return redirect()->route('tasks.index');
         }catch (\Exception $exception){
             DB::rollBack();
             return $exception;
         }
-
-
     }
-
-
 
     public function storePayment(StorePayment $payment, $taskId)
     {
        $validated = $payment->validated();
        $userId =  Auth::id();
+       if (\request('payment_method_id') != 1){
+           \request()->validate([
+               'proof_of_payment' => 'required|image:jpg,jpeg,png,svg',
+           ]);
+       }
+
         $task = $this->checkTask($taskId);
        if (\request()->file('proof_of_payment')){
            $file = \request()->file('proof_of_payment');
+           $validated['proof_of_payment'] =  \request()->file('proof_of_payment')->store('payment');
+         }else{
+           $validated['amount'] =  $task->total_cost;
            $validated['user_id'] = $userId;
            $validated['task_id'] =  $taskId;
-           $validated['proof_of_payment'] =  \request()->file('proof_of_payment')->store('payment');
-           $validated['amount'] =  $task->total_cost;
-
        }
+
 
       Payment::create($validated);
 
@@ -176,7 +199,7 @@ class SurveyController extends Controller
     {
         $form = Form::find($formId);
 
-        return view('dashboard.survey.closing_sentence', compact('form'));
+        return view('list_survey.closing_sentence', compact('form'));
     }
 
 

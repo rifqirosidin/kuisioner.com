@@ -18,11 +18,21 @@
                             <h3 class="block-title">{{ $item->name }}</h3>
                         </div>
                         <div class="block-content" data-toggle="slimscroll" data-height="250px">
-                            @foreach($responses[$key] as $value)
-                                @foreach($value as $item)
-                                    <p>{{ $item }}</p>
+                            @if($item->element_type_id != 4)
+                                @foreach($responses[$key] as $value)
+                                    @foreach($value as $item)
+                                        <p>{{ $item }}</p>
+                                    @endforeach
                                 @endforeach
-                            @endforeach
+                            @else
+                                @foreach($responses[$key] as $id => $value)
+                                    @foreach($value as $item)
+                                        @foreach($item as $value)
+                                        <p>{{ $value }}</p>
+                                        @endforeach
+                                    @endforeach
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <!-- END Autohide Scrollbar -->
@@ -43,7 +53,16 @@
                         @foreach($collect as $value)
                             <tr>
                                 @foreach($value as $item)
-                                    <td>{{ $item }}</td>
+                                    @if(is_array($item))
+                                        <td>
+                                            @foreach($item as $data)
+                                                {{ $data . "," }}
+                                            @endforeach
+                                        </td>
+                                    @else
+                                        <td>{{ $item }}</td>
+                                    @endif
+
                                 @endforeach
                             </tr>
                         @endforeach

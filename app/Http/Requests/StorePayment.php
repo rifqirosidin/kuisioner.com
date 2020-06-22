@@ -24,7 +24,6 @@ class StorePayment extends FormRequest
     public function rules()
     {
         return [
-            'proof_of_payment' => 'required|image:jpg,jpeg,png,svg',
             'payment_method_id' => 'required|numeric'
         ];
     }

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
          $this->call(BannerSeeder::class);
          $this->call(PaymentMethodSeeder::class);
          $this->call(TaskSeeder::class);
-         $this->call(Testimony::class);
+         $this->call(TestimonySeeder::class);
          $this->call(AboutUsSeeder::class);
     }
 }

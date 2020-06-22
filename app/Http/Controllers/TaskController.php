@@ -28,6 +28,7 @@ class TaskController extends Controller
 
     public function create()
     {
+
         return view('dashboard.task.create');
     }
 
@@ -64,31 +65,17 @@ class TaskController extends Controller
         }
 
         $collect = collect($respondent);
-
+//        return $collect;
         $responses = array();
         for ($i=0;$i<$length;$i++){
             $responses[$i] = array($i+1 =>  $collect->pluck($i+1));
         }
-
-//        return $responses;
+//        return $responses[3];
 
 
         return view('dashboard.task.result_survey', compact('task','responses', 'collect'));
     }
-//    function group_by($key, $data) {
-//        $result = array();
-//
-//        foreach($data as $val) {
-//            if(array_key_exists($key, $val)){
-//                $result[$val[$key]][] = $val;
-////                $result[$val[$key]][] = $val;
-//            }else{
-//                $result[""][] = $val;
-//            }
-//        }
-//
-//        return $result;
-//    }
+
 
     public function showForm($taskId)
     {
@@ -102,17 +89,24 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        //
+
+        return view('dashboard.task.edit', compact('task'));
     }
 
-    public function update(Request $request, Task $task)
+    public function update(StoreTask $request, Task $task)
     {
-        //
+        $validated = $request->validated();
+        $task->update($validated);
+        Session::flash('success', 'Update task sukses');
+        return redirect()->route('tasks.index');
+
     }
 
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        Session::flash('success', 'Hapus task sukses');
+        return route('tasks.index');
     }
 
 

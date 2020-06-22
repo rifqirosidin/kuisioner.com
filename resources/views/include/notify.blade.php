@@ -24,3 +24,14 @@
         }); })
     </script>
 @endif
+@if(Session::has('error'))
+    <script>
+        jQuery(function(){ Codebase.helpers('notify', {
+            align: 'right',             // 'right', 'left', 'center'
+            from: 'top',                // 'top', 'bottom'
+            type: 'warning',               // 'info', 'success', 'warning', 'danger'
+            icon: 'fa fa-info mr-5',    // Icon class
+            message: '{{ Session::get('error') }}'
+        }); })
+    </script>
+@endif

@@ -16,7 +16,7 @@ class CreateBalancesTable extends Migration
         Schema::create('balances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('CASCADE');
-            $table->double('amount');
+            $table->double('amount')->unsigned();
             $table->string('status')->nullable();
             $table->timestamps();
         });

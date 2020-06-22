@@ -97,37 +97,38 @@
                 <li>
                     <a href="{{ route('transactions.index') }}"><i class="si si-notebook"></i><span class="sidebar-mini-hide">Transaksi</span></a>
                 </li>
+                @if(auth()->id() == 2)
+                    <li>
+                        <a href="{{ route('payments.index') }}"><i class="fa fa-money"></i><span class="sidebar-mini-hide">Verifikasi Pembayaran</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('top-up.index') }}"><i class="fa fa-money"></i><span class="sidebar-mini-hide">Verifikasi Saldo</span></a>
+                    </li>
 
-                <li>
-                    <a href="{{ route('payments.index') }}"><i class="fa fa-money"></i><span class="sidebar-mini-hide">Verifikasi Pembayaran</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('top-up.index') }}"><i class="fa fa-money"></i><span class="sidebar-mini-hide">Verifikasi Saldo</span></a>
-                </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i><span
+                                class="sidebar-mini-hide">Pengaturan</span></a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('price-balances.index') }}">Harga saldo</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('banners.index') }}">Banner</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('testimonies.index') }}">Testimoni</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('payment-methods.index') }}">Metode Pembayaran</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('about-us.index') }}">Tentang kami</a>
+                            </li>
 
-                <li>
-                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i><span
-                            class="sidebar-mini-hide">Pengaturan</span></a>
-                    <ul>
-                        <li>
-                            <a href="{{ route('price-balances.index') }}">Harga saldo</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('banners.index') }}">Banner</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('testimonies.index') }}">Testimoni</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('payment-methods.index') }}">Metode Pembayaran</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('about-us.index') }}">Tentang kami</a>
-                        </li>
+                        </ul>
 
-                    </ul>
-
-                </li>
+                    </li>
+                @endif
             </ul>
 
         </div>

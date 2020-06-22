@@ -17,6 +17,7 @@
                                    <th>Judul</th>
                                    <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
                                    <th class="d-none d-sm-table-cell" style="width: 10%;">Tanggal Pembuatan</th>
+                                   <th class="d-none d-sm-table-cell" style="width: 10%;">Survey</th>
                                    <th class="text-center" style="width: 15%;">Action</th>
                                </tr>
                                </thead>
@@ -36,6 +37,20 @@
                                        @else
                                            <td class="text-center"><a href="{{ route('show.form', $task->id) }}" target="_blank">Lihat Survey</a></td>
                                        @endif
+                                       <td class="text-center">
+                                           <div class="btn-group">
+                                               <a href="{{ route('tasks.edit', $task->id) }}"
+                                                  class="btn btn-sm btn-secondary js-tooltip-enabled"
+                                                  data-toggle="tooltip" title="" data-original-title="Edit">
+                                                   <i class="fa fa-pencil"></i>
+                                               </a>
+                                               <button type="button" onclick="removeTask('{{ $task->id }}')"
+                                                       class="btn btn-sm btn-secondary js-tooltip-enabled"
+                                                       data-toggle="tooltip" title="" data-original-title="Delete">
+                                                   <i class="fa fa-trash"></i>
+                                               </button>
+                                           </div>
+                                       </td>
                                    </tr>
                                @empty
                                    <tr>
@@ -55,3 +70,46 @@
    </div>
 
 @endsection
+@push('js')
+    <script>
+        function removeTask(id) {
+            let theUrl = "{{ route('tasks.destroy', ":taskId") }}";
+            theUrl = theUrl.replace(":taskId", id);
+
+                toast({
+                    title: 'Apakah anda yakin?',
+                    text: 'Menerima bukti pembayaran ini!',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d26a5c',
+                    confirmButtonText: 'Terima!',
+                    html: false,
+                    preConfirm: e => {
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                resolve();
+                            }, 50);
+                        });
+                    }
+                }).then(result => {
+                    if (result.value) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: theUrl,
+                            success: function (data) {
+                                window.location.href = data
+
+                            },
+                            error: function (data) {
+                                console.log(data)
+                            }
+                        })
+                        // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                    } else if (result.dismiss === 'cancel') {
+                        toast('Cancelled', 'Your imaginary file is safe :)', 'error');
+                    }
+                });
+
+        }
+    </script>
+@endpush

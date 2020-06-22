@@ -15,7 +15,7 @@ class CreateFormElementsTable extends Migration
     {
         Schema::create('form_elements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->constrained();
+            $table->foreignId('form_id')->constrained()->onDelete('CASCADE');
             $table->foreignId('element_type_id')->constrained();
             $table->tinyInteger('column_id');
             $table->string('name');
