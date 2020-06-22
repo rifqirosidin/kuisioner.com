@@ -52,8 +52,10 @@ class TaskController extends Controller
     // hasil survey
     public function show(Task $task)
     {
-        $task= $task->with(['form.formSubmits','form.formElements'])->first();
 
+        $task= Task::with(['form.formSubmits','form.formElements'])->where('id', $task->id)->first();
+
+//        return $task;
         $result = collect($task->form->formSubmits);
         $length = collect($task->form->formElements)->count();
         $respondent = array();
@@ -71,7 +73,7 @@ class TaskController extends Controller
 //        return $responses;
 
 
-        return view('dashboard.task.result_survey', compact('task','responses'));
+        return view('dashboard.task.result_survey', compact('task','responses', 'collect'));
     }
 //    function group_by($key, $data) {
 //        $result = array();

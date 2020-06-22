@@ -5,13 +5,12 @@
         <div class="row">
             <div class="col-12">
                 <h2 class="content-heading font-weight-bold">
-                    <button type="button" class="btn btn-sm btn-rounded btn-alt-secondary float-right">Download csv</button>
+                    <a download="result_survey.csv" href="#" class="btn btn-sm btn-rounded btn-alt-secondary float-right" onclick="return ExcellentExport.csv(this, 'datatable');">Download csv</a>
                     <i class="si si-note mr-5"></i> Hasil Survey
                 </h2>
             </div>
 
             @foreach($task->form->formElements as $key => $item)
-{{--                {{ $key }}--}}
                 <div class="col-lg-7">
                     <!-- Autohide Scrollbar -->
                     <div class="block">
@@ -29,8 +28,28 @@
                     <!-- END Autohide Scrollbar -->
                 </div>
 
-            @endforeach
 
+            @endforeach
+        </div>
+        <div class="row d-none">
+            <div class="col-12">
+                <table border="1" id="datatable">
+                    <thead>
+                        @foreach($task->form->formElements as $key => $item)
+                            <th>{{ $item->name }}</th>
+                        @endforeach
+                    </thead>
+                    <tbody>
+                        @foreach($collect as $value)
+                            <tr>
+                                @foreach($value as $item)
+                                    <td>{{ $item }}</td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection
@@ -38,10 +57,13 @@
 
     <script src="{{ asset('vendor/assets/js/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 
+    <script src="{{ asset('vendor\assets\js\excellentexport.js') }}"></script>
+
     <!-- Page JS Helpers (SlimScroll plugin) -->
     <script>jQuery(function () {
             Codebase.helpers(['slimscroll']);
         });</script>
+
 
 
 @endpush
