@@ -26,6 +26,7 @@ class SurveyController extends Controller
     public function index()
     {
         $tasks = Task::with('user')->active()->latest()->get();
+
         return view('list_survey.index', compact('tasks'));
     }
 
@@ -184,15 +185,40 @@ class SurveyController extends Controller
     public function submitForm($formId)
     {
         $json = json_encode(\request()->except('_token'));
+        $submitUser = FormSubmit::where(['submit_by_user_id' => Auth::id(), 'form_id' => $formId])->first();
+        $form = Form::with('task')->where('id', $formId)->first();
 
-        FormSubmit::create([
-           'form_id' => $formId,
-            'value' => $json,
-            'submit_by_user_id' => Auth::id()
+        if (isset($submitUser) && $form->task->user_id != Auth::id()){
+            Session::flash('error', 'Anda sudah mengerjakan survey ini');
+            return redirect()->route('list.survey');
+        }
 
-        ]);
-        Session::flash('success', 'Data Berhasil disimpan');
-        return redirect()->route('closing.sentence', $formId);
+        DB::beginTransaction();
+        try {
+            FormSubmit::create([
+                'form_id' => $formId,
+                'value' => $json,
+                'submit_by_user_id' => Auth::id()
+
+            ]);
+
+            if ($form->task->user_id != Auth::id()){
+                $fee = $form->task->respondent_fee;
+                $balance = Balance::where('user_id', Auth::id())->first();
+                $currentBalance = $balance->amount + $fee;
+                $balance->update([
+                    'amount' => $currentBalance
+                ]);
+            }
+
+            DB::commit();
+            Session::flash('success', 'Terima kasih sudah mengisi survey ini');
+            return redirect()->route('closing.sentence', $formId);
+        }catch (\Exception $exception){
+            Session::flash('error', 'Survey gagal diisi');
+            DB::rollBack();
+        }
+
     }
 
     public function closingSentence($formId)
@@ -202,12 +228,6 @@ class SurveyController extends Controller
         return view('list_survey.closing_sentence', compact('form'));
     }
 
-
-
-    public function show($id)
-    {
-        //
-    }
 
     public function edit($id)
     {
@@ -219,46 +239,5 @@ class SurveyController extends Controller
         //
     }
 
-    public function store_old(Request $request)
-    {
-        if (\request()->ajax()){
-
-            $columnId = \request('column_id');
-            $name = \request('name'); //question or label form
-            $typeElement = \request('element_type'); //ex: text,radio, dll
-            $required = \request('is_required');
-
-
-            $optionValue = \request('option_value');
-
-            $optionType = \request('type'); //ex:checkbox,radio
-            $taskId = \request('task_id');
-
-
-
-            try {
-                $this->storeFormElement($taskId, $typeElement, $columnId, $name, $required, $optionValue);
-
-                try {$this->storeOptionElement($optionValue, $optionType, $taskId, $columnId);
-                }catch (\Exception $exception){
-                    return $exception;
-                }
-
-                $form = Form::where('task_id', $taskId)->get();
-                return response()->json($form);
-
-//               if (!isset($name) && !isset($optionValue)){
-//                   Session::flash('success', 'Created Survey Successfully');
-//                   return route('tasks.index');
-//               }
-                return route('tasks.index');
-            }catch (\Exception $exception){
-                return response()->json($exception);
-                Session::flash('error', 'Created Survey Failed');
-                return route('tasks.create');
-            }
-
-        }
-    }
 
 }

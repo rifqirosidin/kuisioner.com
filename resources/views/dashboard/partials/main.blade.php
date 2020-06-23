@@ -13,7 +13,7 @@
                             <i class="fa fa-money fa-3x text-body-bg-dark"></i>
                         </div>
                         <div class="font-size-h3 font-w600" data-toggle="countTo" data-speed="1000"
-                             data-to="">0
+                             data-to="{{ $balance->amount ?? ''}}">{{ $balance->amount ?? ''}}
                         </div>
                         <div class="font-size-sm font-w600 text-uppercase text-muted">Saldo</div>
 
@@ -28,8 +28,8 @@
                             <i class="si si-paper-plane fa-3x text-body-bg-dark"></i>
                         </div>
                         <div class="font-size-h3 font-w600"><span data-toggle="countTo" data-speed="1000"
-                                                                  data-to="">0</span></div>
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Pending</div>
+                                                                  data-to="{{ $submit }}">{{ $submit }}</span></div>
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Total Pengerjaan Survey</div>
                     </div>
                 </a>
             </div>
@@ -41,7 +41,7 @@
                             <i class="si si-list fa-3x text-body-bg-dark"></i>
                         </div>
                         <div class="font-size-h3 font-w600" data-toggle="countTo" data-speed="1000"
-                             data-to="">0
+                             data-to="{{ $totalTask }}">{{ $totalTask }}
                         </div>
                         <div class="font-size-sm font-w600 text-uppercase text-muted">Total Tugas</div>
                     </div>

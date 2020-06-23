@@ -6,13 +6,15 @@
 
         @foreach($paymentMethods as $method)
             @if($method->id == 1)
-                @if($balance->amount ?? '' >= $task->total_cost)
-                <div class="form-group">
-                    <div class="custom-control custom-radio mb-2">
-                        <input type="radio" value="{{ $method->id }}" id="payment_method_{{ $method->id }}" name="payment_method_id" class="custom-control-input">
-                        <label class="custom-control-label" for="payment_method_{{ $method->id }}">{{ $method->name }} {{ $method->account_number }}</label>
+                @if(isset($balance->amount ))
+                    @if($balance->amount  >= $task->total_cost)
+                    <div class="form-group">
+                        <div class="custom-control custom-radio mb-2">
+                            <input type="radio" value="{{ $method->id }}" id="payment_method_{{ $method->id }}" name="payment_method_id" class="custom-control-input">
+                            <label class="custom-control-label" for="payment_method_{{ $method->id }}">{{ $method->name }} {{ $method->account_number }}</label>
+                        </div>
                     </div>
-                </div>
+                    @endif
                 @endif
             @else
                 <div class="form-group">

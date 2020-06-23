@@ -13,10 +13,13 @@
             <a class="block block-rounded block-link-shadow" href="{{ route('show.form', $task->id) }}">
                 <div class="block-content block-content-full">
                     <div class="row">
-                        <div class="col-8">
-                            <i class="si si-note text-muted mr-5"></i> {{ $task->title }}
+                        <div class="col-7">
+                            <i class="si si-note font-weight-bold text-muted mr-5"></i> {{ $task->title }}
                         </div>
                         <div class="col-2">
+                            {{ $task->user->name }}
+                        </div>
+                        <div class="col-1">
                             Rp.{{ $task->respondent_fee }}
                         </div>
                         <div class="col-2 float-right">

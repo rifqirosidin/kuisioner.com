@@ -19,7 +19,7 @@ class Form extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tasks()
+    public function task()
     {
         return $this->belongsTo(Task::class);
     }

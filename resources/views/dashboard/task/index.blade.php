@@ -13,16 +13,16 @@
                            <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                                <thead>
                                <tr>
-                                   <th class="text-center"></th>
+                                   <th class="text-center" width="5%"></th>
                                    <th>Judul</th>
                                    <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
                                    <th class="d-none d-sm-table-cell" style="width: 10%;">Tanggal Pembuatan</th>
                                    <th class="d-none d-sm-table-cell" style="width: 10%;">Survey</th>
-                                   <th class="text-center" style="width: 15%;">Action</th>
+                                   <th class="text-center" style="width: 10%;">Action</th>
                                </tr>
                                </thead>
                                <tbody>
-                               @forelse($tasks as $task)
+                               @foreach($tasks as $task)
                                    <tr>
                                        <td class="text-center">{{ $loop->iteration }}</td>
                                        <td><a href="{{ route('tasks.show', $task->id) }}">{{ ucwords($task->title)  }}</a></td>
@@ -52,11 +52,7 @@
                                            </div>
                                        </td>
                                    </tr>
-                               @empty
-                                   <tr>
-                                       <td class="font-weight-bold text-center" colspan="5"></td>
-                                   </tr>
-                               @endforelse
+                               @endforeach
 
                                </tbody>
                            </table>
