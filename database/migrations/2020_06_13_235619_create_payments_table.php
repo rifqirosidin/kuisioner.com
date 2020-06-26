@@ -15,9 +15,9 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('task_id')->constrained();
-            $table->foreignId('payment_method_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('CASCADE');
+            $table->foreignId('task_id')->constrained()->onDelete('CASCADE');
+            $table->foreignId('payment_method_id')->constrained()->onDelete('CASCADE');
             $table->string('status', 50)->default('unverified');
             $table->string('proof_of_payment')->nullable();
             $table->double('amount');

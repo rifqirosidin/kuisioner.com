@@ -7,6 +7,7 @@
                     <div class="block-header">
                         <h3 class="block-title">Edit Tugas</h3>
                     </div>
+
                     <div class="block-content">
                         <form action="{{ route('tasks.update', $task->id) }}" method="post">
                             @csrf
@@ -23,7 +24,7 @@
                                         <label for="number_of_respondents">Jumlah Responden</label>
                                         <input class="form-control" type="number"
                                                value="{{ $task->number_of_respondents }}" id="number_of_respondents"
-                                               name="number_of_respondents">
+                                               name="number_of_respondents" disabled>
 
                                     </div>
                                     <div class="form-group">
@@ -31,7 +32,8 @@
                                         <div class="custom-control custom-radio mb-2">
                                             <input type="radio" id="gender" value="laki-laki" name="gender"
                                                    class="custom-control-input"
-                                                {{ $task->gender == 'laki - laki' ? 'checked':'' }} >
+
+                                                {{ $task->gender == 'laki-laki' ? 'checked':'' }} >
                                             <label class="custom-control-label" for="gender">Laki - Laki</label>
                                         </div>
                                         <div class="custom-control custom-radio">
@@ -58,7 +60,7 @@
                                     <div class="form-group">
                                         <label for="respondent_fee">Insentif Responden</label>
                                         <input class="form-control" type="number" value="{{ $task->respondent_fee }}"
-                                               id="respondent_fee" name="respondent_fee">
+                                               id="respondent_fee" name="respondent_fee" disabled>
 
                                         <span class="text-danger">note: per orang</span>
                                     </div>

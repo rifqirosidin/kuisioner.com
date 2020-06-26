@@ -6,9 +6,11 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Task extends Model
 {
     protected $guarded = [];
+
 
     public function user()
     {
@@ -34,4 +36,6 @@ class Task extends Model
     {
         return $query->where('is_active', 1);
     }
+
+
 }

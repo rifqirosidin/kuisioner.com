@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FormSubmit extends Model
 {
     protected $guarded = [];
+    protected $appends = ['total_responses'];
 
     public function submitByUser()
     {
@@ -18,6 +19,12 @@ class FormSubmit extends Model
     {
         return $this->belongsTo(Form::class);
     }
+
+    public function getTotalResponsesAttribute()
+    {
+        return $this->form()->count();
+    }
+
 
 
 }

@@ -8,7 +8,7 @@
                     <h3 class="block-title text-center font-weight-bold">Submitted</h3>
                 </div>
                 <div class="block-content">
-                    <p class="font-size-md text-center">{{ $form->closing_sentence }}</p>
+                    <p class="font-size-md text-center">{{ isset($form->closing_sentence) ? $form->closing_sentence :'' }}</p>
                 </div>
             </div>
         </div>

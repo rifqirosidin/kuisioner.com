@@ -15,7 +15,7 @@ class CreateFormSubmitsTable extends Migration
     {
         Schema::create('form_submits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->constrained();
+            $table->foreignId('form_id')->constrained()->onDelete('CASCADE');
             $table->longText('value');
             $table->foreignId('submit_by_user_id')->constrained('users');
 

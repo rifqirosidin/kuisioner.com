@@ -11,7 +11,7 @@
                     <div class="form-group">
                         <div class="custom-control custom-radio mb-2">
                             <input type="radio" value="{{ $method->id }}" id="payment_method_{{ $method->id }}" name="payment_method_id" class="custom-control-input">
-                            <label class="custom-control-label" for="payment_method_{{ $method->id }}">{{ $method->name }} {{ $method->account_number }}</label>
+                            <label class="custom-control-label" for="payment_method_{{ $method->id }}">{{ $method->name }} - <span class="font-weight-bold">{{ $balance->amount }}</span></label>
                         </div>
                     </div>
                     @endif

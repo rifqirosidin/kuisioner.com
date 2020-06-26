@@ -20,6 +20,7 @@ class TaskSeeder extends Seeder
            'gender' => 'laki - laki',
            'description' => 'data ini digunakan untuk penelitian',
            'respondent_fee' => 100,
+           'is_active' => 1,
            'total_cost' => 10500,
             'created_at' => Carbon::now()
         ]);

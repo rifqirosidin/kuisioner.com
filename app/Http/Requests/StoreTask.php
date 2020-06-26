@@ -23,15 +23,18 @@ class StoreTask extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'title' => 'required',
-            'number_of_respondents' => 'required|numeric',
             'gender' => 'required|string',
             'description' => 'required',
-            'respondent_fee' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-            'total_cost' => 'required',
             'city' => 'nullable',
 
         ];
+        if ($this->isMethod('POST')){
+            $rules['number_of_respondents'] = 'required|numeric';
+            $rules['respondent_fee'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+        }
+
+        return $rules;
     }
 }

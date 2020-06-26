@@ -3,18 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTask;
-use App\Models\ElementType;
-use App\Models\Form;
-use App\Models\FormElement;
 use App\Models\FormSubmit;
-use App\Models\ListOption;
 use App\Models\Task;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use mysql_xdevapi\Result;
-use function PHPSTORM_META\map;
 
 
 class TaskController extends Controller
@@ -37,8 +29,15 @@ class TaskController extends Controller
     {
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
+        $respondentFee = request('respondent_fee');
+        $numberOfRespondents = request('number_of_respondents');
+        $subTotal = $numberOfRespondents * $respondentFee;
+        $costAdmin = $subTotal * 0.05;
+        $total = $costAdmin + $subTotal;
 
+        $validated['total_cost'] = $total;
         try {
+
            $task = Task::create($validated);
 
             Session::flash('success', 'Task saved');
@@ -50,20 +49,20 @@ class TaskController extends Controller
 
     }
 
-
     // hasil survey
     public function show(Task $task)
     {
-
         $task= Task::with(['form.formSubmits','form.formElements'])
             ->has('form')
             ->where('id', $task->id)
             ->first();
 
-
         if (isset($task)){
             $result = collect($task->form->formSubmits);
             $length = collect($task->form->formElements)->count();
+//            $totalResponses = $result->where('submit_by_user_id', '!=', Auth::id())->count();
+            $totalResponses = $result->count();
+
             $respondent = array();
             foreach ($result as $key => $item) {
                 $respondent[$key] = json_decode($item->value, true);
@@ -80,9 +79,8 @@ class TaskController extends Controller
             $responses = "";
         }
 
-        return view('dashboard.task.result_survey', compact('task','responses', 'collect'));
+        return view('dashboard.task.result_survey', compact('task','responses', 'collect', 'totalResponses'));
     }
-
 
     public function showForm($taskId)
     {
@@ -90,7 +88,6 @@ class TaskController extends Controller
             ->has('form')
             ->where('id', $taskId)
             ->first();
-
 
         $submitUser = FormSubmit::where(['submit_by_user_id' => Auth::id(), 'form_id' => $task->form->id])->first();
 
@@ -123,6 +120,5 @@ class TaskController extends Controller
         Session::flash('success', 'Hapus task sukses');
         return route('tasks.index');
     }
-
 
 }

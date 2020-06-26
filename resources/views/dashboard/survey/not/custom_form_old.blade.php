@@ -5,11 +5,8 @@
                 <div class="form-group pt-0">
                     <div class="row">
                         <div class="col-9">
-                            <div class="form-material floating">
-                                <input type="text" name="label-question[]" class="form-control question">
-                            </div>
-                                <div class="form-material floating change_question pt-0" id="change_question-1">
-{{--                                    <input type="text" name="label-question[]" class="form-control question">--}}
+                                <div class="form-material floating change_question" id="change_question-1">
+                                    <input type="text" name="label-question[]" class="form-control question">
                                     <input type="text" class="form-control type-field-question" value="text" name="element_type[]" readonly>
 
                                 </div>
@@ -23,7 +20,7 @@
                                 <option value="radio">Radio</option>
                                 <option value="checkbox">Checkbox</option>
                                 <option value="date">Date</option>
-{{--                                <option value="file">File</option>--}}
+                                <option value="file">File</option>
                             </select>
                         </div>
 
@@ -78,11 +75,8 @@
                 <div class="form-group pt-0">
                     <div class="row">
                         <div class="col-9">
-                        <div class="form-material floating">
-                                <input type="text" name="label-question[]" class="form-control question">
-                            </div>
-                                <div class="form-material floating change_question pt-0" id="change_question-${questionId}">
-
+                                <div class="form-material floating change_question" id="change_question-${questionId}">
+                                    <input type="text" name="label-question[]" class="form-control question" data-element_type="text">
                                     <input type="text" class="form-control type-field-question" value="text" name="element_type[]" placeholder="Short Text" >
 
                                 </div>
@@ -133,18 +127,20 @@
         console.log(type)
         if (type == TYPE_TEXT){
             $("#change_question-"+ elementId).html(`<div class="form-material floating change_question" id="">
-                                    <input type="text" class="form-control type-field-question" value="text" placeholder="Text" name="element_type[]" readonly>
+                                    <input type="text" name="label-question[]" class="form-control question" data-element_type="text">
+                                    <input type="text" class="form-control type-field-question" value="text" placeholder="Text" name="element_type[]" >
 
                             </div>`)
         } else if(type == TYPE_TEXTAREA){
             $("#change_question-"+elementId).html(`<div class="form-material floating change_question" >
-
-                                   <input type="text" class="form-control type-field-question" value="textarea" name="element_type[]" placeholder="TextArea" readonly>
+                                    <input type="text" name="label-question[]" class="form-control question" data-element_type="textarea">
+                                   <input type="text" class="form-control type-field-question" value="textarea" name="element_type[]" placeholder="TextArea" >
                             </div>`)
         } else if (type == TYPE_RADIO){
 
             $("#change_question-"+elementId).html(`
                                         <div class="form-material floating d-flex">
+                                            <input type="text" name="label-question[]" class="form-control question"  data-element_type="radio">
                                             <input type="hidden" name="element_type[]" class="form-control" value="radio">
                                         </div>
                                         <div class="radio-block-${elementId}">
@@ -163,6 +159,7 @@
                                     </div>`);
         }else if (type == TYPE_CHECKBOX){
             $("#change_question-"+elementId).html(`<div class="form-material floating d-flex">
+                                            <input type="text" name="label-question[]" class="form-control question" data-element_type="checkbox">
                                             <input type="hidden" name="element_type[]" value="checkbox" class="form-control">
                                         </div><div class="checkbox-block">
                                             <div class="d-flex mt-3" id="option-checkbox-${elementId}">
@@ -180,6 +177,7 @@
                                         </div>`)
         } else if (type == TYPE_SELECT){
             $("#change_question-"+elementId).html(`<div class="form-material floating d-flex">
+                                            <input type="text" name="label-question[]" class="form-control question" data-element_type="select">
                                             <input type="hidden" value="select" name="element_type[]" class="form-control">
                                         </div>
                                         <div class="select-block">
@@ -193,13 +191,14 @@
                                         </div>`)
         }else if (type == TYPE_DATE){
             $("#change_question-"+elementId).html(`<div class="form-material floating change_question" >
+                    <input type="text" name="label-question[]" class="form-control question">
                     <input type="date" class="form-control type-field-question" readonly>
                     <input type="hidden" value="date"  name="element_type[]">
 
                 </div>`)
         }else if (type == TYPE_FILE){
             $("#change_question-"+elementId).html(`<div class="form-material floating change_question" id="change_question-1">
-
+                    <input type="text" name="label-question[]" class="form-control question">
                     <input type="file" class="form-control type-field-question" disabled>
                     <input type="hidden" value="file"  name="element_type[]">
 
