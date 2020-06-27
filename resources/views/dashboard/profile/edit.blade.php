@@ -38,6 +38,28 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-12">Jenis kelamin</label>
+                                <div class="col-12">
+                                    <div class="custom-control custom-radio mb-5">
+                                        <input class="custom-control-input" type="radio" name="gender" id="gender" value="laki-laki" {{ $user->gender == 'laki-laki' ? 'checked':'' }}>
+                                        <label class="custom-control-label" for="gender">Laki - Laki</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-5">
+                                        <input class="custom-control-input" type="radio" name="gender" id="gender" value="perempuan" {{ $user->gender == 'perempuan' ? 'checked':'' }}>
+                                        <label class="custom-control-label" for="gender">Perempuan</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="form-material floating">
+                                        <input type="date" class="form-control" name="birthday" value="{{ $user->birthday }}" id="birthday">
+                                        <label for="phone">Tanggal Lahir</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-md-12">
                                     <div class="form-material floating">
                                         <input type="text" class="form-control" name="address" value="{{ $user->address }}" id="address">

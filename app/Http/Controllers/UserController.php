@@ -18,8 +18,6 @@ class UserController extends Controller
 
     public function update(User $user)
     {
-
-
         $password = request('password');
         if (isset($password)){
             \request()->validate([
@@ -39,12 +37,12 @@ class UserController extends Controller
                 'email' => \request('email'),
                 'phone' => \request('phone'),
                 'address' => \request('address'),
+                'birthday' => \request('birthday'),
+                'gender' => \request('gender'),
             ]);
 
             Session::flash('success', 'Updated profil successfully');
         }
-
-
 
         return redirect()->back();
     }

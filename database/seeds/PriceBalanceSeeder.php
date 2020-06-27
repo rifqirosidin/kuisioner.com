@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PriceBalance;
 use Illuminate\Database\Seeder;
 
 class PriceBalanceSeeder extends Seeder
@@ -11,6 +12,11 @@ class PriceBalanceSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $data = [
+          'price' => 10000,
+          'amount_balance' => 10000
+        ];
+
+        PriceBalance::insert($data);
     }
 }

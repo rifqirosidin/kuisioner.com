@@ -26,12 +26,4 @@
 
 }
 
-.navbar-fixed-top.scrolled {
-    background-color: #1f1f1f !important;
-    transition: background-color 200ms linear;
-}
-
-.navbar-fixed-top.scrolled .nav-link {
-    color:white;
-}
 

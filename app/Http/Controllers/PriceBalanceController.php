@@ -54,12 +54,19 @@ class PriceBalanceController extends Controller
         return route('price-balances.index');
     }
 
-    public function ajaxPriceBalance()
+    public function ajaxPrice()
     {
         if (\request()->ajax()){
-            $amount= \request('amount');
-            $ajaxPriceBalances = PriceBalance::where('amount_balance', $amount)->first();
-            return response()->json($ajaxPriceBalances);
+
+            try {
+                $amount= \request('amount_balance');
+                $price = PriceBalance::where('amount_balance', $amount)->first();
+
+                return response()->json($price);
+            }catch (\Exception $exception){
+                return response()->json($exception);
+            }
+
         }
 
 

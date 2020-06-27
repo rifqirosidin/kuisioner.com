@@ -17,7 +17,7 @@
                                     <select class="js-select2 form-control" id="amount_balance" name="amount_balance" style="width: 100%;" data-placeholder="Choose one..">
                                         <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
                                         @foreach($priceBalances as $balance)
-                                            <option value="{{ $balance->amount_balance }}" data-price_balance_id="{{ $balance->id }}">{{ $balance->amount_balance }}</option>
+                                            <option value="{{ $balance->amount_balance }}">{{ $balance->amount_balance }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -103,17 +103,19 @@
     <script>
         $("#amount_balance").change(function () {
             let amount = $(this).val()
+            console.log(amount)
             $.ajax({
-                type:"get",
-                url: "{{ route('ajax.price.balance') }}",
+                url: "{{ route('ajax.price-balance') }}",
+                type:"POST",
                 data: {
-                    amount: amount
+                    amount_balance: amount
                 },
-                success: function (data) {
-                    $("#price").val(data.price)
+                success: function (res) {
+                    console.log(res)
+                    $("#price").val(res.price)
                 },
-                error: function (data) {
-
+                error: function (res) {
+                    console.log(res)
                 }
             })
         })

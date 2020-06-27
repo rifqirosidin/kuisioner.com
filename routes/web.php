@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function (){
     Route::resource('balances', 'BalanceController');
     Route::resource('top-up', 'TopUpBalanceController');
 
-
+    Route::post('ajax/price-balance', 'PriceBalanceController@ajaxPrice')->name('ajax.price-balance');
 
     //admin
     Route::middleware('admin')->group(function (){
@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function (){
         Route::patch('verify/payments', 'PaymentController@verifyPayment')->name('verify.payment');
         Route::resource('payments', 'PaymentController');
         Route::get('/form/respondents', 'TaskController@displayRespondent')->name('display.respondent.update');
-        Route::get('ajax/price-balances', 'PriceBalanceController@ajaxPriceBalance')->name('ajax.price.balance');
+
         Route::resource('price-balances', 'PriceBalanceController');
         Route::patch('verify/receive-balances', 'TopUpBalanceController@ajaxVerified')->name('receive.balance');
         Route::patch('verify/reject-balances', 'TopUpBalanceController@ajaxUnVerified')->name('reject.balance');

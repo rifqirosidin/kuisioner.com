@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-
+            $table->enum('gender',['laki-laki','perempuan'])->nullable();
+            $table->date('birthday')->nullable();
             $table->foreign('role_id')->references('id')->on('roles');
             $table->rememberToken();
             $table->timestamps();

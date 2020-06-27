@@ -4,7 +4,7 @@
     <div id="page-container" class="bg-white sidebar-inverse side-scroll page-header-fixed page-header-inverse main-content-boxed">
 
         <!-- Sidebar -->
-        <nav id="sidebar" style="background: #232e40" class="navbar-fixed-top">
+        <nav id="sidebar" style="background: #232e40">
             <!-- Sidebar Content -->
             <div class="sidebar-content">
                 <!-- Side Header -->
@@ -12,7 +12,7 @@
                     <div class="content-header-section text-center align-parent">
                         <!-- Close Sidebar, Visible only on mobile screens -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                        <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none align-v-r" data-toggle="layout" data-action="sidebar_close">
+                        <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none  align-v-r" data-toggle="layout" data-action="sidebar_close">
                             <i class="fa fa-times text-danger"></i>
                         </button>
                         <!-- END Close Sidebar -->
@@ -20,7 +20,7 @@
                         <!-- Logo -->
                         <div class="content-header-item">
                             <a class="link-effect font-w700" href="/">
-                                <h2 class="text-warning">Kuisioner.com</h2>
+                                <h2 class="text-white">Kuisioner.com</h2>
                             </a>
                         </div>
                         <!-- END Logo -->
@@ -32,23 +32,20 @@
                 <div class="content-side content-side-full">
                     <ul class="nav-main">
                         <li>
-                            <a href="/">Responden</a>
+                            <a href="{{ route('list.survey') }}" class="nav-link">Cari survey</a>
                         </li>
                         <li>
-                            <a href="/">Surveyor</a>
+                            <a href="{{ route('aboutUs') }}" class="nav-link">Tentang Kami</a>
                         </li>
                         <li>
-                            <a href="/">Tentang Kami</a>
+                            <a href="{{ route('contact') }}" class="nav-link">Kontak</a>
                         </li>
-                        <li>
-                            <a href="/">Kontak</a>
-                        </li>
-
 
                         @if(auth()->check())
+
                             <li>
-                                <a  class="nav-submenu text-white " data-toggle="nav-submenu" href="#" >{{ auth()->user()->name }}</a>
-                                <ul>
+                                <a  class="nav-submenu text-white menu_titipmasa" data-toggle="nav-submenu" href="#" >{{ auth()->user()->name }}</a>
+                                <ul class="submenu">
                                     <li>
                                         <a class="text-white" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
@@ -65,7 +62,6 @@
                                     </li>
                                 </ul>
                             </li>
-
                         @else
 
                             <li>
@@ -74,7 +70,6 @@
                             <li>
                                 <a href="{{ route('register') }}">Register</a>
                             </li>
-
                         @endif
 
                     </ul>
@@ -86,14 +81,14 @@
         <!-- END Sidebar -->
 
         <!-- Header -->
-        <header id="page-header" class="bg-corporate-dark-op shadow-sm navbar-fixed-top">
+        <header id="page-header" class="bg-corporate-dark-op shadow-sm">
             <!-- Header Content -->
             <div class="content-header">
                 <!-- Left Section -->
                 <div class="content-header-section">
                     <!-- Logo -->
                     <a href="/">
-                        <img src="{{ asset('images/logo/kuisioner.png') }}" width="50%" alt="" class="titipmasa-logo">
+                        <img src="{{ asset('images/logo/kuisioner.png') }}" width="50%" alt="">
                     </a>
                     <!-- END Logo -->
                 </div>
@@ -203,15 +198,4 @@
     </div>
 
 @endsection
-
-@push('js')
-    <script>
-        // $(function () {
-        //     $(document).scroll(function () {
-        //         var $nav = $(".navbar-fixed-top");
-        //         $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-        //     });
-        // });
-    </script>
-@endpush
 

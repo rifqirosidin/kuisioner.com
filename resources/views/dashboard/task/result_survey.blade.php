@@ -52,7 +52,7 @@
 
         </div>
 
-        <div class="row d-none">
+        <div class="row">
             <div class="col-12">
                 <table border="1" id="datatable">
                     <thead>
