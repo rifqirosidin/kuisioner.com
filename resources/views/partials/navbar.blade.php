@@ -44,7 +44,7 @@
                         @if(auth()->check())
 
                             <li>
-                                <a  class="nav-submenu text-white menu_titipmasa" data-toggle="nav-submenu" href="#" >{{ auth()->user()->name }}</a>
+                                <a  class="nav-submenu text-white" data-toggle="nav-submenu" href="#" >{{ auth()->user()->name }}</a>
                                 <ul class="submenu">
                                     <li>
                                         <a class="text-white" href="{{ route('logout') }}"
@@ -88,7 +88,10 @@
                 <div class="content-header-section">
                     <!-- Logo -->
                     <a href="/">
-                        <img src="{{ asset('images/logo/kuisioner.png') }}" width="50%" alt="">
+                        <img class="d-none d-lg-inline" src="{{ asset('images/logo/kuisioner.png') }}" width="50%" alt="">
+                    </a>
+                    <a class="link-effect font-w700 d-lg-none" href="/">
+                        <span class="font-size-xl text-white">Kuisioner</span><span class="font-size-xl">.com</span>
                     </a>
                     <!-- END Logo -->
                 </div>
@@ -110,7 +113,7 @@
                     @if(auth()->check())
 
                             <li>
-                                <a  class="nav-submenu text-white menu_titipmasa" data-toggle="nav-submenu" href="#" >{{ auth()->user()->name }}</a>
+                                <a  class="nav-submenu text-white" data-toggle="nav-submenu" href="#" >{{ auth()->user()->name }}</a>
                                 <ul class="submenu">
                                     <li>
                                         <a class="text-white" href="{{ route('logout') }}"
@@ -139,7 +142,7 @@
                         @endif
                     </ul>
 
-                    <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none bg-warning" data-toggle="layout" data-action="sidebar_toggle">
+                    <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none sidebar_toggle" data-toggle="layout" data-action="sidebar_toggle">
                         <i class="fa fa-navicon"></i>
                     </button>
                     <!-- END Toggle Sidebar -->
@@ -198,4 +201,11 @@
     </div>
 
 @endsection
+@push('js')
 
+{{--    <script>--}}
+{{--       if ($(window).width() < 700) {--}}
+{{--           $(".sidebar_toggle").css("display", "inline")--}}
+{{--       }--}}
+{{--    </script>--}}
+@endpush

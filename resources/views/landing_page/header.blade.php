@@ -1,7 +1,7 @@
 
      <header class="mt-50">
          <div class="row">
-             <div class="col-md-12 col-12">
+             <div class="col-md-12">
                  <div class="js-slider slick-nav-black slick-dotted-inner slick-dotted-white" data-dots="true" data-arrows="true">
                     @forelse($sliders as $slider)
                          <div>

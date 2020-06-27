@@ -16,14 +16,21 @@
     font-size: 15px;
 
 }
-.panel-form {
-    width: 100%;
-    margin-bottom: 5px;
-}
-.panel-menu {
-    position: fixed;
-    left: 830px;
+
+
+
+@media (max-width: 576px) {
+    .tag-line-slider .tag-line-title {
+        color: #cf7208;
+        width: 300px;
+        font-size: 20px;
+    }
+
+    .tag-line-slider .tag-line-desc {
+        color: #575554;
+        width: 300px;
+        font-size: 12px;
+
+    }
 
 }
-
-

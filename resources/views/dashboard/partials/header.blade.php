@@ -10,7 +10,7 @@
         <!-- User Info -->
         <div class="content-header-item">
             <a class="img-link mr-5" href="#">
-                <img class="img-avatar img-avatar32" src="{{ asset('vendor/titipmasa/assets/media/avatars/avatar15.jpg') }}" alt="">
+                <img class="img-avatar img-avatar32" src="{{ asset('vendor/assets/media/avatars/avatar15.jpg') }}" alt="">
             </a>
             <a class="align-middle link-effect text-primary-dark font-w600" href="#">John Smith</a>
         </div>
