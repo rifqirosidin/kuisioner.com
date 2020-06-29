@@ -28,7 +28,7 @@
                                 <input type="text" class="form-control col-md-8" name="price" id="price" readonly>
                             </div>
                             <div class="form-group row">
-                                <label class="col-12" for="amount_balance">Methode Pembayaran</label>
+                                <label class="col-12" for="amount_balance">Metode Pembayaran</label>
                                 <div class="col-lg-8">
                                     <select class="js-select2 form-control" id="payment_method_id" name="payment_method_id" style="width: 100%;" data-placeholder="Choose one..">
                                         <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->

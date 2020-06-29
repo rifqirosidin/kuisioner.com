@@ -14,7 +14,7 @@ class TransactionController extends Controller
 
     public function index()
     {
-        $payments = Payment::with(['paymentMethod','task'])->latest()->get();
+        $payments = Payment::with(['paymentMethod','task'])->where('user_id', Auth::id())->latest()->get();
         return view('transaction.index', compact('payments'));
     }
 
