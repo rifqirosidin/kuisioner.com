@@ -9,6 +9,7 @@
                     <i class="si si-note mr-5"></i> Hasil Survey
                 </h3>
             </div>
+            @isset($task)
             <div class="col-md-7">
                 <div class="block">
                     <div class="block-header">
@@ -16,11 +17,11 @@
                     </div>
                     <div class="block-content">
                      <p class="font-weight-bold">Target Responden: {{ $task->number_of_respondents }}</p>
-                     <p class="font-weight-bold">Responden: {{ $totalResponses}}</p>
+                     <p class="font-weight-bold">Responden: {{ $totalResponses }}</p>
                     </div>
                 </div>
             </div>
-            @isset($task)
+
             @foreach($task->form->formElements as $key => $item)
                 <div class="col-lg-7">
                     <!-- Autohide Scrollbar -->

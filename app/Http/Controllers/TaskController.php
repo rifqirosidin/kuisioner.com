@@ -77,6 +77,7 @@ class TaskController extends Controller
         } else {
             $collect = "";
             $responses = "";
+            $totalResponses= 0;
         }
 
         return view('dashboard.task.result_survey', compact('task','responses', 'collect', 'totalResponses'));
