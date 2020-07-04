@@ -55,7 +55,7 @@
 
         <div class="row">
             <div class="col-12">
-                <table border="1" id="datatable">
+                <table border="1" id="datatable" class="d-none">
                     <thead>
                         @foreach($task->form->formElements as $key => $item)
                             <th>{{ $item->name }}</th>
