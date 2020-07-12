@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="block block-bordered">
-                    <div class="block-header">
+                    <div class="block-header block-header-default">
                         <h3 class="block-title">Top up Saldo</h3>
                     </div>
                     <div class="block-content">
@@ -39,6 +39,10 @@
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nomor Rekening</label>
+                                <input type="text" class="form-control col-8" id="account_number" value="" disabled>
                             </div>
 
                             <div class="form-group row">
@@ -113,8 +117,29 @@
                 success: function (res) {
                     console.log(res)
                     $("#price").val(res.price)
+
                 },
                 error: function (res) {
+                    alert("Maaf ada kesalahan sistem")
+                    console.log(res)
+                }
+            })
+        })
+        $("#payment_method_id").change(function () {
+            let paymentMethodID = $(this).val()
+
+            $.ajax({
+                url: "{{ route('ajax.payment-method') }}",
+                type:"POST",
+                data: {
+                    payment_method_id: paymentMethodID
+                },
+                success: function (res) {
+                    console.log(res)
+                    $("#account_number").val(res.account_number)
+                },
+                error: function (res) {
+                    alert("Maaf ada kesalahan sistem")
                     console.log(res)
                 }
             })

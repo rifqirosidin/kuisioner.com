@@ -46,4 +46,12 @@ class PaymentMethodController extends Controller
         Session::flash('success', 'Deleted Payment Method Successfully');
         return route('payment-methods.index');
     }
+    public function ajaxGetAccountNumber()
+    {
+        if (\request()->ajax()){
+            $id = \request('payment_method_id');
+            $method = PaymentMethod::find($id);
+            return response()->json($method);
+        }
+    }
 }

@@ -15,21 +15,25 @@
                             <tr>
                                 <th class="text-center"></th>
                                 <th class="d-none d-sm-table-cell" width="15%">User</th>
-                                <th class="d-none d-sm-table-cell" width="15%">Image</th>
-                                <th class="d-none d-sm-table-cell" width="15%">Uang</th>
+                                <th class="d-none d-sm-table-cell" width="15%">Pembayaran</th>
+                                <th class="d-none d-sm-table-cell" width="15%">Harga</th>
                                 <th class="d-none d-sm-table-cell" width="10%">Jumlah Saldo</th>
                                 <th class="d-none d-sm-table-cell" width="15%">Metode Pembayaran</th>
                                 <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
                                 <th class="text-center" style="width: 15%;">Action</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="js-gallery">
                             @foreach($topUps as $topUp)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td class="font-w600">{{ $topUp->user->name }}</td>
 
-                                    <td><img width="80" height="80" src="{{ asset('storage/' . $topUp->proof_of_payment) }}" alt=""></td>
+                                    <td>
+                                        <a class="img-link img-link-zoom-in img-lightbox" href="{{ asset('storage/' . $topUp->proof_of_payment) }}">
+                                            <img width="80" height="80" src="{{ asset('storage/' . $topUp->proof_of_payment) }}" alt="">
+                                        </a>
+                                    </td>
                                     <td>{{  $topUp->price }}</td>
                                     <td class="d-none d-sm-table-cell">{{ $topUp->amount_balance }}</td>
                                     <td class="d-none d-sm-table-cell">{{ $topUp->paymentMethod->name }}</td>

@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function (){
     Route::resource('top-up', 'TopUpBalanceController');
 
     Route::post('ajax/price-balance', 'PriceBalanceController@ajaxPrice')->name('ajax.price-balance');
+    Route::post('ajax/payment-method', 'PaymentMethodController@ajaxGetAccountNumber')->name('ajax.payment-method');
 
     //admin
     Route::middleware('admin')->group(function (){

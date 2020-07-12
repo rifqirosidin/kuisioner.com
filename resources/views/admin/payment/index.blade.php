@@ -63,16 +63,9 @@
         </div>
     </div>
 @endsection
-@push('css_after')
-    <link rel="stylesheet" href="{{ asset('vendor/assets/js/plugins/magnific-popup/magnific-popup.css') }}">
-@endpush
-@push('js')
-    <script src="{{ asset('vendor/assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 
-    <!-- Page JS Helpers (Magnific Popup plugin) -->
-    <script>jQuery(function () {
-            Codebase.helpers('magnific-popup');
-        });</script>
+@push('js')
+
     <script>
 
 
