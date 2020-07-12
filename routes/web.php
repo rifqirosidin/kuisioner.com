@@ -24,6 +24,7 @@ Route::get('/contact','LandingPageController@contact')->name('contact');
 Auth::routes();
 Route::middleware('auth')->group(function (){
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    Route::patch('users/change-photo', 'UserController@updatePhotoProfile')->name('change.photo');
     Route::resource('users', 'UserController');
     Route::get('tasks/{taskId}/show-form', 'TaskController@showForm')->name('show.form');
     Route::resource('tasks', 'TaskController');

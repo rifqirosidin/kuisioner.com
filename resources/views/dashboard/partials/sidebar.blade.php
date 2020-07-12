@@ -40,15 +40,26 @@
         <div class="content-side content-side-full content-side-user px-10 align-parent">
             <!-- Visible only in mini mode -->
             <div class="sidebar-mini-visible-b align-v animated fadeIn">
-                <img class="img-avatar img-avatar32" src="{{ asset('vendor\assets\media\avatars\avatar16.jpg') }}"
-                     alt="">
+                @if(isset(auth()->user()->avatar))
+                    <img class="img-avatar img-avatar32" src="{{ asset('storage/' . auth()->user()->avatar) }}"
+                         alt="">
+                @else
+                    <img class="img-avatar img-avatar32" src="{{ asset('vendor\assets\media\avatars\avatar16.jpg') }}"
+                         alt="">
+                @endif
             </div>
             <!-- END Visible only in mini mode -->
 
             <!-- Visible only in normal mode -->
             <div class="sidebar-mini-hidden-b text-center">
                 <a class="img-link" href="#">
-                    <img class="img-avatar" src="{{ asset('vendor\assets\media\avatars\avatar16.jpg') }}" alt="">
+                    @if(isset(auth()->user()->avatar))
+                        <img class="img-avatar img-avatar" src="{{ asset('storage/' . auth()->user()->avatar) }}"
+                             alt="">
+                    @else
+                        <img class="img-avatar img-avatar" src="{{ asset('vendor\assets\media\avatars\avatar16.jpg') }}"
+                             alt="">
+                    @endif
                 </a>
                 <ul class="list-inline mt-10">
                     <li class="list-inline-item">

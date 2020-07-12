@@ -122,7 +122,39 @@
                     </div>
 
                 </form>
+                <div>
+                    <form action="{{ route('change.photo') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('PATCH')
+                        <div class="block block-bordered">
+                            <div class="block-header">
+                                <h3 class="block-title">Ubah Foto Profil</h3>
+                            </div>
+                            <div class="block-content">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material floating">
+                                            <input type="file" class="form-control" name="avatar"  id="avatar" required>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material floating">
+                                            <button class="btn btn-sm btn-primary float-right" type="submit">Update Photo</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
             </div>
+          >
         </div>
 
     </div>

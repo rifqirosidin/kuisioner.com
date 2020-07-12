@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -45,6 +47,28 @@ class UserController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function updatePhotoProfile()
+    {
+
+        $id = Auth::id();
+        $user = User::find($id);
+        try {
+            if (\request()->hasFile('avatar')){
+                $avatar = \request()->file('avatar')->store('avatar');
+                Storage::delete($user->avatar);
+                $user->update([
+                    'avatar' => $avatar
+                ]);
+            }
+            Session::flash('success', 'Ubah foto profil sukses');
+            return redirect()->route('users.edit', $id);
+
+        }catch (\Exception $exception){
+            Session::flash('error', 'Ubah foto profil gagal');
+            return redirect()->back();
+        }
     }
 
 

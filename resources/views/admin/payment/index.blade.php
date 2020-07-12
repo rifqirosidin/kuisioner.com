@@ -10,7 +10,7 @@
                     </div>
                     <div class="block-content block-content-full">
                         <!-- DataTables functionality is initialized with .js-dataTable-full class in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
-                        <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                        <table class="table table-bordered table-striped table-vcenter js-dataTable-full ">
                             <thead>
                             <tr>
                                 <th class="text-center"></th>
@@ -23,13 +23,20 @@
                                 <th class="text-center" style="width: 15%;">Action</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="js-gallery">
                             @foreach($tasks as $task)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td class="font-w600">{{ $task->user->name }}</td>
 
-                                    <td><img width="80" height="80" src="{{ asset('storage/' . $task->payment->proof_of_payment) }}" alt=""></td>
+                                    <td>
+                                        <div class="animated fadeIn">
+                                            <a class="img-link img-link-zoom-in img-thumb img-lightbox" href="{{ asset('storage/' . $task->payment->proof_of_payment) }}">
+                                                <img width="80" height="80" src="{{ asset('storage/' . $task->payment->proof_of_payment) }}" alt="">
+                                            </a>
+                                        </div>
+
+                                    </td>
                                     <td>{{ $task->payment->paymentMethod->name }}</td>
                                     <td class="d-none d-sm-table-cell">{{ $task->payment->amount }}</td>
                                     <td class="d-none d-sm-table-cell">
@@ -56,7 +63,16 @@
         </div>
     </div>
 @endsection
+@push('css_after')
+    <link rel="stylesheet" href="{{ asset('vendor/assets/js/plugins/magnific-popup/magnific-popup.css') }}">
+@endpush
 @push('js')
+    <script src="{{ asset('vendor/assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+
+    <!-- Page JS Helpers (Magnific Popup plugin) -->
+    <script>jQuery(function () {
+            Codebase.helpers('magnific-popup');
+        });</script>
     <script>
 
 
