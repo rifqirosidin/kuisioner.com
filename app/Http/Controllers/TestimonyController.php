@@ -46,7 +46,7 @@ class TestimonyController extends Controller
     public function update(Request $request, Testimony $testimony)
     {
         $validated = $request->validate([
-           'title' => 'required|string',
+           'name' => 'required|string',
            'content' => 'required|string'
         ]);
 
