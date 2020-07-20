@@ -100,14 +100,15 @@
                 <!-- Right Section -->
                 <div class="content-header-section">
                     <ul class="nav-main-header">
+
                         <li>
-                            <a href="{{ route('list.survey') }}" class="nav-link">Cari survey</a>
+                            <a href="{{ route('list.survey') }}" class="nav-link {{ request()->url() == route('list.survey') ? 'active':'' }}">Cari survey</a>
                         </li>
                         <li>
-                            <a href="{{ route('aboutUs') }}" class="nav-link">Tentang Kami</a>
+                            <a href="{{ route('aboutUs') }}" class="nav-link {{ request()->url() == route('aboutUs') ? 'active':'' }}">Tentang Kami</a>
                         </li>
                         <li>
-                            <a href="{{ route('contact') }}" class="nav-link">Kontak</a>
+                            <a href="{{ route('contact') }}" class="nav-link {{ request()->url() == route('contact') ? 'active':'' }}">Kontak</a>
                         </li>
 
                     @if(auth()->check())
