@@ -34,8 +34,9 @@
         <!-- Page JS Helpers (Magnific Popup plugin) -->
         <script>jQuery(function () {
                 Codebase.helpers('magnific-popup');
-            });</script>
-        <script>
+            });
+        </script>
+
 
 
     @endpush

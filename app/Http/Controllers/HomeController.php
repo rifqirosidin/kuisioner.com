@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Balance;
 use App\Models\FormSubmit;
 use App\Models\Task;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -27,10 +29,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $balance = Balance::where('user_id', Auth::id())->first();
 
-        $totalTask = Task::where('user_id', Auth::id())->count();
-        $submit = FormSubmit::where('submit_by_user_id', Auth::id())->count();
+        $userId = Auth::id();
+        $balance = Balance::where('user_id',$userId)->first();
+        $totalTask = Task::where('user_id', $userId)->count();
+        $tasks = DB::table('tasks')
+            ->join('forms','tasks.id','=','forms.task_id')
+            ->selectRaw("forms.id as formId")
+            ->whereRaw("tasks.user_id = $userId")
+            ->get();
+        $formId = [];
+        foreach($tasks as $task){
+            array_push($formId, $task->formId);
+        }
+
+        $submit = FormSubmit::where('submit_by_user_id', $userId)
+            ->whereNotIn('form_id', $formId)
+            ->count();
+
         return view('dashboard.index', compact('balance', 'totalTask', 'submit'));
     }
 }

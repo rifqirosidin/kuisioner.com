@@ -15,10 +15,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public static $TABLE_NAME = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
+     *
      */
     protected $fillable = [
         'name', 'email', 'password','phone','address','gender','birthday','avatar'
