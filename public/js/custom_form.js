@@ -26,7 +26,7 @@ $("#btn_add_field").click(function (e) {
                             </div>
                                 <div class="form-material floating change_question pt-0" id="change_question-${questionId}">
 
-                                    <input type="text" class="form-control type-field-question" value="text" name="element_type[]" placeholder="Short Text" disabled>
+                                    <input type="text" class="form-control type-field-question" value="text" name="element_type[]" placeholder="Short Text" readonly>
 
                                 </div>
 
