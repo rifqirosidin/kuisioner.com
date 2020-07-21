@@ -96,7 +96,7 @@ function changeFormElement(elementId){
                                                     <input type="radio" class="css-control-input " >
                                                     <span class="css-control-indicator"></span>
                                                 </label>
-                                                <input type="text" class="radio-option question" name="radio-option_${elementId}[]" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; width: 250px;">
+                                                <input type="text" class="radio-option question form-control" name="radio-option_${elementId}[]" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; ">
                                                 <i class="fa fa-close font-size-md align-self-center remove-option" onclick="removeRadio(${elementId})"  style="cursor: pointer"></i>
                                             </div>
 
@@ -113,7 +113,7 @@ function changeFormElement(elementId){
                                                     <input type="checkbox" name="element_type[]" class="css-control-input">
                                                     <span class="css-control-indicator"></span>
                                                 </label>
-                                                <input type="text" class="checkbox-option question" name="checkbox-option_${elementId}[]" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; width: 250px;">
+                                                <input type="text" class="checkbox-option question form-control" name="checkbox-option_${elementId}[]" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; ">
                                                 <i class="fa fa-close font-size-md align-self-center" onclick="removeCheckbox(${elementId})" style="cursor: pointer"></i>
                                             </div>
 
@@ -127,7 +127,7 @@ function changeFormElement(elementId){
                                         </div>
                                         <div class="select-block">
                                             <div class="d-flex mt-3" id="option-select-${elementId}">
-                                                <input type="text" class="select-option question" name="select-option_${elementId}[]" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; width: 250px;" placeholder="option">
+                                                <input type="text" class="select-option question form-control" name="select-option_${elementId}[]" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; " placeholder="option">
                                                 <i class="fa fa-close font-size-md align-self-center" onclick="removeOptionSelect(${elementId})" style="cursor: pointer" ></i>
                                             </div>
 
@@ -158,7 +158,7 @@ function addOptionRadio(id){
                     <input type="radio" class="css-control-input " name="element_type[]">
                     <span class="css-control-indicator"></span>
                 </label>
-                <input type="text" name="radio-option_${id}[]" class="radio-option question" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; width: 250px;">
+                <input type="text" name="radio-option_${id}[]" class="radio-option question form-control" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; ">
                 <i class="fa fa-close font-size-md align-self-center remove-option" onclick="removeRadio(${id})" style="cursor: pointer"></i>
             </div>`)
     return false;
@@ -175,7 +175,7 @@ function addOptionCheckbox(id) {
                                                     <input type="checkbox" class="css-control-input">
                                                     <span class="css-control-indicator"></span>
                                                 </label>
-                                                <input type="text" name="checkbox-option_${id}[]" class="checkbox-option question" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; width: 250px;">
+                                                <input type="text" name="checkbox-option_${id}[]" class="checkbox-option question form-control" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; ">
                                                 <i class="fa fa-close font-size-md align-self-center" onclick="removeCheckbox(${id})" style="cursor: pointer"></i>
                                             </div>
 
@@ -194,7 +194,7 @@ function removeCheckbox(id) {
 function addOptionSelect(id) {
 
     $("#newOptionSelect-"+id).append(` <div class="d-flex mt-3" id="option-select-${id}">
-                                                <input type="text" class="select-option question" name="select-option_${id}[]" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; width: 250px;" placeholder="option">
+                                                <input type="text" class="select-option question form-control" name="select-option_${id}[]" style="outline: 0; border-width: 0 0 2px; border-color:  #d4dae3; " placeholder="option">
                                                 <i class="fa fa-close font-size-md align-self-center" onclick="removeOptionSelect(${id})" style="cursor: pointer" ></i>
                                             </div>`)
 
